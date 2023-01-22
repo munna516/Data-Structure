@@ -5,6 +5,7 @@ int main()
     int *p;
     // p = (int *) malloc(5* sizeof(int));// In c, heap memory allocating
     p = new int[5];
+    
     p[0] = 1;
     p[1] = 5;
     p[2] = 5;
