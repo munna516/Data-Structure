@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-void TOH(int n, int A, int B, int C)
+void TOH(int n, int A, int B, int C)  // Recursive Function
 {
     if (n > 0)
     {
@@ -11,6 +11,6 @@ void TOH(int n, int A, int B, int C)
 }
 int main()
 {
-    TOH(10, 1, 2, 3);
+    TOH(5, 1, 2, 3);
     return 0;
 }
