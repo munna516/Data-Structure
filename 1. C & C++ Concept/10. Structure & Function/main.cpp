@@ -26,6 +26,5 @@ int main()
     change_value(&r, 20);
     cout << "Length  : " << r.length << " "
          << " Breadth : " << r.breadth << endl;
-
     return 0;
 }
