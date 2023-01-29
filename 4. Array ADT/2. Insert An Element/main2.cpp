@@ -27,7 +27,7 @@ void Insert(Array *a, int index, int x)
 }
 int main()
 {
-    Array ar = {{1, 2, 3, 4, 5}, 20, 5};
+    Array ar = {{1, 2, 3, 4, 5}, 20, 4};
     Insert(&ar, 3, 19);
     display(ar);
     return 0;
