@@ -15,21 +15,21 @@ void display(Array ar) // Displaying The elements
     }
     cout << endl;
 }
-int Get(Array ar, int index)
+int Get(Array ar, int index) // Get value from index
 {
     if (index >= 0 && index < ar.length)
     {
         return ar.A[index];
     }
 }
-void Set(Array *ar, int index, int x)
+void Set(Array *ar, int index, int x) // Set a value in an index
 {
     if (index >= 0 && index < ar->length)
     {
         ar->A[index] = x;
     }
 }
-int Max(Array ar)
+int Max(Array ar) // Finding Max value
 {
     int max = ar.A[0];
     for (int i = 1; i < ar.length; i++)
@@ -39,7 +39,7 @@ int Max(Array ar)
     }
     return max;
 }
-int min(Array ar)
+int min(Array ar) // Finding Min value
 {
     int min = ar.A[0];
     for (int i = 1; i < ar.length; i++)
@@ -49,7 +49,7 @@ int min(Array ar)
     }
     return min;
 }
-int Sum(Array ar)
+int Sum(Array ar) // Sum of the Array
 {
     int total = 0;
     for (int i = 0; i < ar.length; i++)
@@ -57,6 +57,10 @@ int Sum(Array ar)
         total += ar.A[i];
     }
     return total;
+}
+float Avg(Array ar) // Finding Average value
+{
+    return (float)Sum(ar) / ar.length;
 }
 int main()
 {
@@ -67,9 +71,8 @@ int main()
     display(ar);
     cout << "Maximum value of this Array : " << Max(ar) << endl;
     cout << "Minimun value of this Array : " << min(ar) << endl;
-    int total = Sum(ar);
-    cout << "Summation of the array : " << total << endl;
-    cout << "Average of the Array : " << (double)total / (ar.length) << endl;
+    cout << "Summation of the array : " << Sum(ar) << endl;
+    cout << "Average of the Array : " << Avg(ar) << endl;
 
     return 0;
 }
