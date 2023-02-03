@@ -2,41 +2,71 @@
 using namespace std;
 class Array
 {
-public:
-    int A[20];
+private:
+    int *A;
     int size;
     int length;
-};
-void display(Array *a)
-{
-    for (int i = 0; i < a->length; i++)
+
+public:
+    Array(int sz)
     {
-        cout << a->A[i] << " ";
+        size = sz;
+        length = 0;
+        A = new int[sz];
+    }
+    ~Array()
+    {
+        delete[] A;
+    }
+    void display();
+    // void set();
+    void Insert(int index, int x);
+    void Delete(int index);
+};
+void Array::display()
+{
+    cout << "Printing Elements : " << endl;
+    for (int i = 0; i < length; i++)
+    {
+        cout << A[i] << " ";
     }
     cout << endl;
 }
-int Delete(Array *a, int index)
+void Array::Delete(int index)
 {
     int x = 0;
-    x = a->A[index];
-    if (index >= 0 && index < a->length)
+    x = A[index];
+    if (index >= 0 && index < length)
     {
-        for (int i = index; i < a->length - 1; i++)
+        for (int i = index; i < length - 1; i++)
         {
-            a->A[i] = a->A[i + 1];
+            A[i] = A[i + 1];
         }
-        a->length--;
-        return x;
+        length--;
+    }
+}
+void Array::Insert(int index, int x)
+{
+    if (index >= 0 && index <= length)
+    {
+        for (int i = length; i >= index; i--)
+        {
+            A[i] = A[i - 1];
+        }
+        A[index] = x;
+        length++;
     }
 }
 int main()
 {
-    Array ar = {{1, 2, 3, 4, 5, 6, 7}, 20, 7};
-    cout << "Before Deleting Element : ";
-    display(&ar);
-    cout << "Deleted Elements is : " << Delete(&ar, 4) << endl;
-    cout << "After Deleting Element : ";
-    display(&ar);
+    Array ar(100);
+    ar.Insert(0, 15);
+    ar.Insert(1, 25);
+    ar.Insert(2, 35);
+    ar.Insert(3, 65);
+    ar.display();
+    ar.Delete(1);
+    ar.display();
 
     return 0;
 }

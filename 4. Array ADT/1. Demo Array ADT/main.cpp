@@ -2,45 +2,45 @@
 using namespace std;
 class Array
 {
-public:
+private:
     int *A;
     int size;
     int length;
- /*
-    void display()    // Printing Inside The Class 
+
+public:
+    Array(int sz, int len)
     {
-        for (int i = 0; i < length; i++)
-            cout << A[i] << endl;
-    }  
- */
+        size = sz;
+        length = len;
+        A = new int[sz];
+    }
+    ~Array()
+    {
+        delete[] A;
+    }
+    void display();
+    void set();
 };
-void display(Array a)
+void Array::display()
 {
     cout << "Printing Elements : " << endl;
-    for (int i = 0; i < a.length; i++)
+    for (int i = 0; i < length; i++)
     {
-        cout << a.A[i] << " ";
+        cout << A[i] << " ";
+    }
+}
+void Array::set()
+{
+    for (int i = 0; i < 10; i++)
+    {
+        A[i] = i + 1;
     }
 }
 int main()
 {
-    Array ar;
-    int n;
-    cout << "Enter the size of an array : ";
-    cin >> ar.size;
-    ar.A = new int[ar.size];
-    ar.length = 0;
-    cout << "Enter how many elements : ";
-    cin >> n;
-    ar.length = n;
-    cout << "Scanning elements : " << endl;
-    for (int i = 0; i < n; i++)
-    {
-        cin >> ar.A[i];
-    }
-     display(ar);  // Calling Outside class 
-
-    //ar.display();   // Calling Inside The class
+    Array ar(100,10);
+    ar.set();
+    ar.display();
 
     return 0;
 }

@@ -2,33 +2,54 @@
 using namespace std;
 class Array
 {
-public:
-    int A[20];
+private:
+    int *A;
     int size;
     int length;
+
+public:
+    Array(int sz)
+    {
+        size = sz;
+        length = 0;
+        A = new int[sz];
+    }
+    ~Array()
+    {
+        delete[] A;
+    }
+    void display();
+    // void set();
+    void Insert(int index, int x);
 };
-void display(Array ar)
+void Array::display()
 {
     cout << "Printing Elements : " << endl;
-    for (int i = 0; i < ar.length; i++)
-        cout << ar.A[i] << " ";
-}
-void Insert(Array *a, int index, int x)
-{
-    if (index >= 0 && index <= a->length)
+    for (int i = 0; i < length; i++)
     {
-        for (int i = a->length; i >= index; i--)
+        cout << A[i] << " ";
+    }
+}
+void Array::Insert(int index, int x)
+{
+    if (index >= 0 && index <= length)
+    {
+        for (int i = length; i >= index; i--)
         {
-            a->A[i] = a->A[i - 1];
+            A[i] = A[i - 1];
         }
-        a->A[index] = x;
-        a->length++;
+        A[index] = x;
+        length++;
     }
 }
 int main()
 {
-    Array ar = {{1, 2, 3, 4, 5}, 20, 4};
-    Insert(&ar, 3, 19);
-    display(ar);
+    Array ar(100);
+    ar.Insert(0, 15);
+    ar.Insert(1, 25);
+    ar.Insert(2, 35);
+    ar.Insert(3, 65); 
+    ar.display();
+
     return 0;
 }
