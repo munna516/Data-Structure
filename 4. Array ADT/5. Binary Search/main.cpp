@@ -2,29 +2,52 @@
 using namespace std;
 class Array
 {
-public:
-    int A[20];
+private:
+    int *A;
     int size;
     int length;
+
+public:
+    Array(int sz, int len)
+    {
+        size = sz;
+        length = len;
+        A = new int[sz];
+    }
+    ~Array()
+    {
+        delete[] A;
+    }
+    void display();
+    void set();
+    int Binary_Search(int key);
 };
-void display(Array ar)
+void Array::display()
 {
     cout << "Printing Elements : " << endl;
-    for (int i = 0; i < ar.length; i++)
-        cout << ar.A[i] << " ";
-    cout << endl;
+    for (int i = 0; i < length; i++)
+    {
+        cout << A[i] << " ";
+    }
 }
-int Binary_Search(Array ar, int key)
+void Array::set()
 {
-    int l = 0, h = ar.length - 1;
+    for (int i = 0; i < 10; i++)
+    {
+        A[i] = i + 1;
+    }
+}
+int Array::Binary_Search(int key)
+{
+    int l = 0, h = length - 1;
     int mid;
 
     while (l <= h)
     {
         mid = (l + h) / 2;
-        if (key == ar.A[mid])
+        if (key == A[mid])
             return mid;
-        else if (key < ar.A[mid])
+        else if (key < A[mid])
             h = mid - 1;
         else
             l = mid + 1;
@@ -33,8 +56,10 @@ int Binary_Search(Array ar, int key)
 }
 int main()
 {
-    Array ar = {{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}, 20, 15};
-    cout << Binary_Search(ar, 11) << endl;
-    display(ar);
+    Array ar(10, 8);
+    ar.set();
+    cout << ar.Binary_Search(4) << endl;
+
+    ar.display();
     return 0;
 }
