@@ -6,6 +6,13 @@ struct Array
     int size;
     int length;
 };
+void Swap(int *x, int *y) // Swapping Two elements
+{
+    int temp;
+    temp = *x;
+    *x = *y;
+    *y = temp;
+}
 void display(struct Array ar) // Printing Elements
 {
     for (int i = 0; i < ar.length; i++)
@@ -119,6 +126,24 @@ float Avg(struct Array ar) // Average of the array
 {
     return (float)Sum(ar) / ar.length;
 }
+void Reverse1(struct Array *ar) // Reversing The Array
+{
+    int *B;
+    B = new int[ar->length];
+    for (int i = ar->length - 1, j = 0; i >= 0; i--, j++)
+        B[j] = ar->A[i];
+    for (int i = 0; i < ar->length; i++)
+    {
+        ar->A[i] = B[i];
+    }
+}
+void Reverse2(struct Array *ar)
+{
+    for (int i = 0, j = ar->length - 1; i < j; i++, j--)
+    {
+        Swap(&ar->A[i], &ar->A[j]);
+    }
+}
 int main()
 {
     struct Array ar = {{1, 2, 3, 4, 5, 6}, 20, 6};
@@ -143,5 +168,9 @@ int main()
     cout << "Minimum Value of the Array : " << Min(ar) << endl;
     cout << "Sum of the Array is : " << Sum(ar) << endl;
     cout << "Average of the Array is : " << Avg(ar) << endl;
+    cout << "Reversing the Array : ";
+    Reverse1(&ar);
+    display(ar);
+   
     return 0;
 }
