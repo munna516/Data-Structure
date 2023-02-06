@@ -48,7 +48,7 @@ int main()
     ar.Insert(0, 15);
     ar.Insert(1, 25);
     ar.Insert(2, 35);
-    ar.Insert(3, 65); 
+    ar.Insert(3, 65);
     ar.display();
 
     return 0;
