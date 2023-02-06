@@ -126,7 +126,7 @@ float Avg(struct Array ar) // Average of the array
 {
     return (float)Sum(ar) / ar.length;
 }
-void Reverse1(struct Array *ar) // Reversing The Array
+void Reverse1(struct Array *ar) // Reversing The Array (method 1)
 {
     int *B;
     B = new int[ar->length];
@@ -137,40 +137,120 @@ void Reverse1(struct Array *ar) // Reversing The Array
         ar->A[i] = B[i];
     }
 }
-void Reverse2(struct Array *ar)
+void Reverse2(struct Array *ar) // Reverse an Array (method 2)
 {
     for (int i = 0, j = ar->length - 1; i < j; i++, j--)
     {
         Swap(&ar->A[i], &ar->A[j]);
     }
 }
+void InsertSort(struct Array *ar, int value) // Inserting An element of sorted Array
+{
+    int i = ar->length - 1;
+    if (ar->length == ar->size)
+        return;
+    while (i >= 0 && ar->A[i] > value)
+    {
+        ar->A[i + 1] = ar->A[i];
+        --i;
+    }
+    ar->A[i + 1] = value;
+    ar->length++;
+}
+bool isSort(struct Array ar) // Checking Element is sort or not
+{
+    for (int i = 0; i < ar.length - 1; i++)
+    {
+        if (ar.A[i] > ar.A[i + 1])
+            return false;
+    }
+    return true;
+}
+void Rearrange(Array *ar) // Rearranging Array
+{
+    int i = 0;
+    int j = ar->length - 1;
+    while (i < j)
+    {
+        while (ar->A[i] < 0)
+        {
+            i++;
+        }
+        while (ar->A[j] >= 0)
+        {
+            j--;
+        }
+        if (i < j)
+            Swap(&ar->A[i], &ar->A[j]);
+    }
+}
+struct Array *Merge(Array *arr1, Array *arr2)
+{
+    int i, j, k;
+    i = j = k = 0;
+    Array *arr3;
+    arr3 = new Array[sizeof(Array)];
+    while (i < arr1->length && j < arr2->length)
+    {
+        if (arr1->A[i] < arr2->A[j])
+        {
+            arr3->A[k++] = arr1->A[i++];
+        }
+        else
+        {
+            arr3->A[k++] = arr2->A[j++];
+        }
+    }
+    for (; i < arr1->length; i++)
+        arr3->A[k++] = arr1->A[i];
+    for (; j < arr2->length; j++)
+        arr3->A[k++] = arr2->A[j];
+    arr3->length = arr1->length + arr2->length;
+    arr3->size = 20;
+    return arr3;
+}
 int main()
 {
-    struct Array ar = {{1, 2, 3, 4, 5, 6}, 20, 6};
+    struct Array ar = {{1, 6, 7, 9, 10}, 20, 5};
+    struct Array ar2 = {{2, 3, 4, 5, 8}, 20, 5};
+    struct Array *ar3 = Merge(&ar, &ar2);
+    display(*ar3);
+
     cout << "Printing Array Element : ";
     display(ar);
+
     cout << "Appending an Element : ";
-    Append(&ar, 10);
+    Append(&ar, 11);
     display(ar);
+
     cout << "Inserting a value in an index : ";
     Inset(&ar, 2, 100);
     display(ar);
+
     cout << "Deleting a value from an index : ";
     Delete(&ar, 2);
     display(ar);
+
     cout << "Value found in index(Linear Search : ) : " << Linear_Search(ar, 4) << endl;
     cout << "Value found in index(Binary Search : ) : " << Binary_Search(ar, 2) << endl;
     cout << "In given index value is : " << Get(ar, 3) << endl;
     cout << "Set a new value in an index : ";
-    Set(&ar, 3, 9);
+    Set(&ar, 2, 3);
     display(ar);
+
     cout << "Maximum Value of the Array : " << Max(ar) << endl;
     cout << "Minimum Value of the Array : " << Min(ar) << endl;
     cout << "Sum of the Array is : " << Sum(ar) << endl;
     cout << "Average of the Array is : " << Avg(ar) << endl;
+
+    cout << "Inserting a new Element of Sorted Array : ";
+    InsertSort(&ar, 8);
+    display(ar);
+
+    cout << "Check the Array is Sorted or not : " << boolalpha << isSort(ar) << endl;
     cout << "Reversing the Array : ";
     Reverse1(&ar);
     display(ar);
-   
+    
     return 0;
 }
