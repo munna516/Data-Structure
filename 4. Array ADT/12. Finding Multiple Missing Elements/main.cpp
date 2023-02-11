@@ -18,7 +18,6 @@ int main()
             }
         }
     }
-    
     cout << endl;
     // Reduce time complixiety method
     int l = 1, h = 12, n = 10;
