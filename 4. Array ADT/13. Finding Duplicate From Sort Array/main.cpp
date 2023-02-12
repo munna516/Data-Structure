@@ -30,12 +30,16 @@ int main()
     }
 
     // Using Hashtable method
+    cout<<"Hashing Method :  "<<endl;
     int B[100]{0};
+    int max = -1;
     for (int i = 0; i < n; i++)
     {
         B[A[i]]++;
+        if (A[i] > max)
+            max = A[i];
     }
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < max; i++)
     {
         if (B[i] > 1)
             cout << i << " Appeare in " << B[i] << " times" << endl;
