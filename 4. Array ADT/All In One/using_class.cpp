@@ -32,7 +32,10 @@ public:
     void Reverse();
     void Swap(int *x, int *y);
     void Issort();
+    void InsertSort(int x);
 };
+
+// Swapping Two Elements
 void Array::Swap(int *x, int *y)
 {
     int temp;
@@ -40,6 +43,8 @@ void Array::Swap(int *x, int *y)
     *x = *y;
     *y = temp;
 }
+
+// Printing Array Elements
 void Array::display()
 {
     for (int i = 0; i < length; i++)
@@ -48,6 +53,8 @@ void Array::display()
     }
     cout << endl;
 }
+
+// Insert New Value In a Array
 void Array::Insert(int index, int value)
 {
     if (index >= 0 && index <= length)
@@ -60,6 +67,8 @@ void Array::Insert(int index, int value)
         length++;
     }
 }
+
+// Deleting A Value From An Array
 void Array::Delete(int index)
 {
     if (index >= 0 && index < length)
@@ -72,6 +81,8 @@ void Array::Delete(int index)
         length--;
     }
 }
+
+// Searching Element
 void Array::LinearSearch(int key)
 {
     int x = -1;
@@ -88,6 +99,8 @@ void Array::LinearSearch(int key)
     else
         cout << "Value Not Found" << endl;
 }
+
+// Searching Element
 void Array::BinarySearch(int key)
 {
     int l = 0, h = length - 1, mid, y = -1;
@@ -109,6 +122,8 @@ void Array::BinarySearch(int key)
     else
         cout << "Value Not Found" << endl;
 }
+
+// Searching Element Using Recursion
 int Array::BinarySearchRecursion(int low, int high, int key)
 {
     int mid;
@@ -124,16 +139,22 @@ int Array::BinarySearchRecursion(int low, int high, int key)
             return (mid + 1, high, key);
     }
 }
+
+// Get The value Specific Index
 void Array::Get(int index)
 {
     cout << "In index " << index << " the value is : " << A[index] << endl;
 }
+
+// Set a  new Value at a index
 void Array::Set(int index, int value)
 {
     int x = A[index];
     A[index] = value;
     cout << "Set the value at index " << index << " is : " << A[index] << endl;
 }
+
+// Finding Max Value From An Array
 void Array::Max()
 {
     int max = A[0];
@@ -144,6 +165,8 @@ void Array::Max()
     }
     cout << "Maximun Value of The arry is : " << max << endl;
 }
+
+// Finding Minimun Value From An Array
 void Array::Min()
 {
     int min = A[0];
@@ -154,6 +177,8 @@ void Array::Min()
     }
     cout << "Maximun Value of The arry is : " << min << endl;
 }
+
+// Finding The sum of an Array
 void Array::Sum()
 {
     int sum = 0;
@@ -162,6 +187,8 @@ void Array::Sum()
     cout << "Sum Of the Array is : " << sum << endl;
     cout << "Average of the Array is : " << (float)sum / length << endl;
 }
+
+// Reversing The Array
 void Array::Reverse()
 {
     for (int i = 0, j = length - 1; i < j; i++, j--)
@@ -169,6 +196,8 @@ void Array::Reverse()
         Swap(&A[i], &A[j]);
     }
 }
+
+// Check Array is Sort Or Not
 void Array::Issort()
 {
     int count = 0;
@@ -184,6 +213,27 @@ void Array::Issort()
         cout << "The Array is Sorted" << endl;
     else
         cout << "The Array is not Sorted" << endl;
+}
+
+// Insert a Element In a sorted Array
+void Array::InsertSort(int x)
+{
+    for (int i = 0; i < length; i++)
+    {
+        for (int j = i + 1; j < length; j++)
+        {
+            if (A[i] > A[j])
+                Swap(&A[i], &A[j]);
+        }
+    }
+    int i = length - 1;
+    while (i >= 0 && A[i] > x)
+    {
+        A[i + 1] = A[i];
+        i--;
+    }
+    A[i + 1] = x;
+    length++;
 }
 int main()
 {
@@ -210,6 +260,8 @@ int main()
     ar.Reverse();
     ar.display();
     ar.Issort();
+    ar.InsertSort(35);
+    ar.display();
 
     return 0;
 }
