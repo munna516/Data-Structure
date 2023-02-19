@@ -33,6 +33,7 @@ public:
     void Swap(int *x, int *y);
     void Issort();
     void InsertSort(int x);
+    void Merge();
 };
 
 // Swapping Two Elements
@@ -235,6 +236,31 @@ void Array::InsertSort(int x)
     A[i + 1] = x;
     length++;
 }
+
+// Merging Two Array
+void Array::Merge()
+{
+    int B[]{15, 25, 45, 55, 65};
+    int x = sizeof(B) / sizeof(B[0]);
+    int *C;
+    C = new int[length +x];
+    int i, j, k;
+    i = j = k = 0;
+    while (i < length && j < x)
+    {
+        if (A[i] < B[j])
+            C[k++] = A[i++];
+        else
+            C[k++] = B[j++];
+    }
+    for (; i < length; i++)
+        C[k++] = A[i++];
+    for (; j < x; j++)
+        C[k++] = B[j++];
+    for (int i = 0; i < 12; i++)
+        cout << C[i] << " ";
+    cout << endl;
+}
 int main()
 {
     Array ar(20);
@@ -262,6 +288,8 @@ int main()
     ar.Issort();
     ar.InsertSort(35);
     ar.display();
+    ar.Merge();
+
 
     return 0;
 }
