@@ -251,6 +251,6 @@ int main()
     cout << "Reversing the Array : ";
     Reverse1(&ar);
     display(ar);
-    
+
     return 0;
 }
