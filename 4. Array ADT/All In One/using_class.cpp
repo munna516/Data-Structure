@@ -29,7 +29,17 @@ public:
     void Max();
     void Min();
     void Sum();
+    void Reverse();
+    void Swap(int *x, int *y);
+    void Issort();
 };
+void Array::Swap(int *x, int *y)
+{
+    int temp;
+    temp = *x;
+    *x = *y;
+    *y = temp;
+}
 void Array::display()
 {
     for (int i = 0; i < length; i++)
@@ -152,21 +162,42 @@ void Array::Sum()
     cout << "Sum Of the Array is : " << sum << endl;
     cout << "Average of the Array is : " << (float)sum / length << endl;
 }
-
+void Array::Reverse()
+{
+    for (int i = 0, j = length - 1; i < j; i++, j--)
+    {
+        Swap(&A[i], &A[j]);
+    }
+}
+void Array::Issort()
+{
+    int count = 0;
+    for (int i = 0; i < length - 1; i++)
+    {
+        if (A[i] > A[i + 1])
+        {
+            count++;
+            break;
+        }
+    }
+    if (count == 0)
+        cout << "The Array is Sorted" << endl;
+    else
+        cout << "The Array is not Sorted" << endl;
+}
 int main()
 {
     Array ar(20);
     ar.Insert(0, 10);
-    ar.Insert(1, 20);
-    ar.Insert(2, 30);
+    ar.Insert(1, 30);
+    ar.Insert(2, 60);
     ar.Insert(3, 40);
     ar.Insert(4, 49);
-    ar.Insert(5, 60);
+    ar.Insert(5, 20);
     ar.Insert(6, 70);
     ar.display();
-    ar.Delete(2);
+    ar.Delete(6);
     ar.display();
-    ar.Insert(2, 30);
     ar.LinearSearch(40);
     ar.BinarySearch(600);
     ar.Get(2);
@@ -174,6 +205,11 @@ int main()
     ar.Max();
     ar.Min();
     ar.Sum();
+    ar.Reverse();
+    ar.display();
+    ar.Reverse();
+    ar.display();
+    ar.Issort();
 
     return 0;
 }
