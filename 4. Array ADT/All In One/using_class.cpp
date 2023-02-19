@@ -24,6 +24,11 @@ public:
     void LinearSearch(int key);
     void BinarySearch(int key);
     int BinarySearchRecursion(int low, int high, int key);
+    void Get(int index);
+    void Set(int index, int value);
+    void Max();
+    void Min();
+    void Sum();
 };
 void Array::display()
 {
@@ -109,6 +114,45 @@ int Array::BinarySearchRecursion(int low, int high, int key)
             return (mid + 1, high, key);
     }
 }
+void Array::Get(int index)
+{
+    cout << "In index " << index << " the value is : " << A[index] << endl;
+}
+void Array::Set(int index, int value)
+{
+    int x = A[index];
+    A[index] = value;
+    cout << "Set the value at index " << index << " is : " << A[index] << endl;
+}
+void Array::Max()
+{
+    int max = A[0];
+    for (int i = 1; i < length; i++)
+    {
+        if (A[i] > max)
+            max = A[i];
+    }
+    cout << "Maximun Value of The arry is : " << max << endl;
+}
+void Array::Min()
+{
+    int min = A[0];
+    for (int i = 1; i < length; i++)
+    {
+        if (A[i] < min)
+            min = A[i];
+    }
+    cout << "Maximun Value of The arry is : " << min << endl;
+}
+void Array::Sum()
+{
+    int sum = 0;
+    for (int i = 0; i < length; i++)
+        sum += A[i];
+    cout << "Sum Of the Array is : " << sum << endl;
+    cout << "Average of the Array is : " << (float)sum / length << endl;
+}
+
 int main()
 {
     Array ar(20);
@@ -116,14 +160,20 @@ int main()
     ar.Insert(1, 20);
     ar.Insert(2, 30);
     ar.Insert(3, 40);
-    ar.Insert(4, 50);
+    ar.Insert(4, 49);
     ar.Insert(5, 60);
     ar.Insert(6, 70);
     ar.display();
     ar.Delete(2);
     ar.display();
+    ar.Insert(2, 30);
     ar.LinearSearch(40);
     ar.BinarySearch(600);
-  
+    ar.Get(2);
+    ar.Set(4, 50);
+    ar.Max();
+    ar.Min();
+    ar.Sum();
+
     return 0;
 }
