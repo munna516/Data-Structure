@@ -1,3 +1,5 @@
+// Only the diagonal element is non-zero
+
 #include <bits/stdc++.h>
 using namespace std;
 class Matrices
@@ -7,10 +9,10 @@ private:
     int n;
 
 public:
-    Matrices(int size)
+    Matrices(int n)
     {
-        n = size;
-        A = new int[size];
+        this->n = n;
+        A = new int[n];
     }
     ~Matrices()
     {
@@ -55,6 +57,6 @@ int main()
     m.Set(3, 3, 16);
     m.Set(4, 4, 25);
     m.Set(5, 5, 29);
-    cout << m.Get(3, 3)<<endl;
+    cout << m.Get(3, 3) << endl;
     m.display();
 }
