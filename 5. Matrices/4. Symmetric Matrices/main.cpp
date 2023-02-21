@@ -1,3 +1,8 @@
+/*
+Total Element : n^2
+Total Lower Triangular Element : n*(n+1)/2
+Total Zero Element : n*(n-1)/2;
+*/
 #include <bits/stdc++.h>
 using namespace std;
 class LowerTri
@@ -22,15 +27,14 @@ public:
 };
 void LowerTri::display()
 {
-    for (int row = 1; row <= n; row++)
+    for (int i = 1; i <= n; i++)
     {
-        for (int col = 1; col <= n; col++)
+        for (int j = 1; j <= n; j++)
         {
-            if (row >= col)
-                cout << A[n * (col - 1) + (col - 2) * (col - 1) / 2 + row - col] << " ";
+            if (i >= j)
+                cout << A[i * (i - 1) / 2 + j - 1] << "  ";
             else
-                cout << "0"
-                     << "  ";
+                cout << A[j * (j - 1) / 2 + i - 1] << "  ";
         }
         cout << endl;
     }
@@ -38,12 +42,12 @@ void LowerTri::display()
 void LowerTri::Set(int row, int col, int value)
 {
     if (row >= col)
-        A[n * (col - 1) + (col - 2) * (col - 1) / 2 + row - col] = value;
+        A[row * (row - 1) / 2 + col - 1] = value;
 }
 int LowerTri::Get(int row, int col)
 {
     if (row >= col)
-        return A[n * (col - 1) + (col - 2) * (col - 1) / 2 + row - col];
+        return A[row * (row - 1) / 2 + col - 1];
     else
         return 0;
 }
@@ -62,8 +66,8 @@ int main()
             m.Set(i, j, x);
         }
     }
-    cout << "\n\n\n"
-         << endl;
+    cout << endl;
+    cout << "Printing The Symmetices Matrices : " << endl;
 
     m.display();
 }

@@ -32,10 +32,10 @@ void LowerTri::display()
         for (int j = 1; j <= n; j++)
         {
             if (i >= j)
-                cout << A[i * (i - 1) / 2 + j - 1] << " ";
+                cout << A[i * (i - 1) / 2 + j - 1] << "  ";
             else
                 cout << "0"
-                     << " ";
+                     << "  ";
         }
         cout << endl;
     }

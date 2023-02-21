@@ -27,9 +27,9 @@ void UpperTriangle::Display()
         for (int col = 1; col <= n; col++)
         {
             if (col >= row)
-                cout << A[col * (col - 1) / 2 + (row - 1)] << " ";
+                cout << A[col * (col - 1) / 2 + (row - 1)] << "  ";
             else
-                cout << "0 ";
+                cout << "0"<< "  ";
         }
         cout << endl;
     }
