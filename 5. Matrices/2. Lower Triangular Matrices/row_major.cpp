@@ -1,3 +1,8 @@
+/*
+Total Element : n^2
+Total Lower Triangular Element : n*(n+1)/2
+Total Zero Element : n*(n-1)/2;
+*/
 #include <bits/stdc++.h>
 using namespace std;
 class LowerTri
