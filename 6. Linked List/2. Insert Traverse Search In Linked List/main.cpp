@@ -113,7 +113,42 @@ public:
             a->next = newnode;
         }
         else
+        {
             return;
+        }
+    }
+    // Delete A node From Head
+    void DeleteAtHead()
+    {
+        if (head == NULL)
+            return;
+        node *a = head;
+        head = a->next;
+        delete a;
+        size--;
+    }
+    void DeleteAnyIndex(int index)
+    {
+        if (index < 0 && index > size - 1)
+        {
+            return;
+        }
+        if (index == 0)
+        {
+            DeleteAtHead();
+            return;
+        }
+        node *a = head;
+        int current_index = 0;
+        while (current_index != index - 1)
+        {
+            a = a->next;
+            current_index++;
+        }
+        node *b = a->next;
+        a->next = b->next;
+        delete b;
+        size--;
     }
 };
 int main()
@@ -122,8 +157,11 @@ int main()
     l.InsertAtHead(10);
     l.InsertAtHead(20);
     l.InsertAtHead(40);
-    cout << l.size << endl;
     l.InsertAtAnyIndex(3, 100);
+    l.InsertAtAnyIndex(2, 600);
+    l.Traverse();
+    cout << l.size << endl;
+    l.DeleteAnyIndex(1);
     l.Traverse();
     return 0;
 }
