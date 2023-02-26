@@ -127,6 +127,7 @@ public:
         delete a;
         size--;
     }
+    // Delete A node from Any Index
     void DeleteAnyIndex(int index)
     {
         if (index < 0 && index > size - 1)
@@ -150,6 +151,28 @@ public:
         delete b;
         size--;
     }
+    // Insert A Node After a Specific Value
+    void InsertAfterValue(int value, int data)
+    {
+        node *a = head;
+        while (a != NULL)
+        {
+            if (a->data == value)
+            {
+                break;
+            }
+            a = a->next;
+        }
+        if (a == NULL)
+        {
+            cout << "This Value Doesn't Exist In Linked List" << endl;
+            return;
+        }
+        node *newnode = CreateNewNode(data);
+        newnode->next = a->next;
+        a->next = newnode;
+        size++;
+    }
 };
 int main()
 {
@@ -161,7 +184,7 @@ int main()
     l.InsertAtAnyIndex(2, 600);
     l.Traverse();
     cout << l.size << endl;
-    l.DeleteAnyIndex(1);
+    l.InsertAfterValue(600, 500);
     l.Traverse();
     return 0;
 }
