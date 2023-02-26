@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 struct Node
 {
     int data;
@@ -31,10 +30,29 @@ void Display(struct Node *p)
         p = p->next;
     }
 }
+void DisplayRecursion(struct Node *p)
+{
+    if (p != NULL)
+    {
+        printf("%d ", p->data);
+        DisplayRecursion(p->next);
+    }
+    printf("\n");
+}
+void DisplayReverseRecursion(struct Node *p)
+{
+    if (p != NULL)
+    {
+        DisplayReverseRecursion(p->next);
+        printf("%d ", p->data);
+    }
+}
 int main()
 {
     int A[] = {3, 6, 2, 9, 7, 10};
     Create(A, 6);
     Display(head);
+    DisplayRecursion(head);
+    DisplayReverseRecursion(head);
     return 0;
 }
