@@ -173,6 +173,18 @@ public:
         a->next = newnode;
         size++;
     }
+    // Printing Reverse Order
+    void ReversePrint2(node *a)
+    {
+        if (a == NULL)
+            return;
+        ReversePrint2(a->next);
+        cout << a->data << " ";
+    }
+    void ReversePrint()
+    {
+        ReversePrint2(head);
+    }
 };
 int main()
 {
@@ -186,5 +198,6 @@ int main()
     cout << l.size << endl;
     l.InsertAfterValue(600, 500);
     l.Traverse();
+    l.ReversePrint();
     return 0;
 }
