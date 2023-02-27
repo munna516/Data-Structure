@@ -112,12 +112,55 @@ int MaxElementRecursion(struct Node *p)
     x = MaxElementRecursion(p->next);
     return p->data > x ? p->data : x;
 }
+// Search Key
+struct Node *LSearch(struct Node *p, int key)
+{
+    while (p != NULL)
+    {
+        if (p->data == key)
+            return p;
+        p = p->next;
+    }
+    return NULL;
+}
+// Recursive Version of Search
+struct Node *RLSearch(struct Node *p, int key)
+{
+    if (p == NULL)
+        return NULL;
+    if (p->data == key)
+        return p;
+    return RLSearch(p->next, key);
+}
+// Improving Linear search
+struct Node *ImproveLSearch(struct Node *p, int key)
+{
+    struct Node *q = NULL;
+    while (p != NULL)
+    {
+        if (p->data == key)
+        {
+            q->next = p->next;
+            p->next = head;
+            head = p;
+            return p;
+        }
+        q = p;
+        p = p->next;
+    }
+    return NULL;
+}
+
 int main()
 {
+    struct Node *temp;
     int A[] = {3, 6, 2, 10, 7, 9};
     Create(A, 6);
-    printf("Max value %d\n", MaxElement(head));
-    printf("Max value %d\n", MaxElementRecursion(head));
-
+    temp = ImproveLSearch(head, 9);
+    if (temp)
+        printf("Key Is found\n");
+    else
+        printf("Key Not Found\n");
+    Display(head);
     return 0;
 }
