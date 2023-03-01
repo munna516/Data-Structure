@@ -150,17 +150,39 @@ struct Node *ImproveLSearch(struct Node *p, int key)
     }
     return NULL;
 }
-
+// Insert a new Node
+void Insert(struct Node *p, int index, int value)
+{
+    struct Node *t;
+    if (index < 0 && index > CountNode(p))
+        return;
+    t = (struct node *)malloc(sizeof(struct Node));
+    t->data = value;
+    if (index == 0)
+    {
+        t->next = head;
+        head = t;
+    }
+    else
+    {
+        int current_index = 0;
+        while (current_index != index - 1)
+        {
+            p = p->next;
+            current_index++;
+        }
+        t->next = p->next;
+        p->next = t;
+    }
+}
 int main()
 {
-    struct Node *temp;
-    int A[] = {3, 6, 2, 10, 7, 9};
-    Create(A, 6);
-    temp = ImproveLSearch(head, 9);
-    if (temp)
-        printf("Key Is found\n");
-    else
-        printf("Key Not Found\n");
+    Insert(head, 0, 10);
+    Insert(head, 1, 3);
+    Insert(head, 2, 33);
+    Insert(head, 3, 35);
+    Insert(head, 2, 19);
     Display(head);
+
     return 0;
 }
