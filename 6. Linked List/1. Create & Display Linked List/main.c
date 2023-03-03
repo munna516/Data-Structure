@@ -7,15 +7,17 @@ struct Node
     struct Node *next;
 } *head = NULL;
 int size = 0;
-struct Node *CreateNode()
+struct Node *CreateNewNode(int x)
 {
     struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
+    new_node->data = x;
+    new_node->next = NULL;
     return new_node;
 }
 void Create_Using_Array(int A[], int n)
 {
     struct Node *t, *last;
-    t = CreateNode();
+    t = (struct Node *)malloc(sizeof(struct Node));
     t->data = A[0];
     t->next = NULL;
     head = t;
@@ -23,9 +25,7 @@ void Create_Using_Array(int A[], int n)
     size++;
     for (int i = 1; i < n; i++)
     {
-        struct Node *p = CreateNode();
-        p->data = A[i];
-        p->next = NULL;
+        struct Node *p = CreateNewNode(A[i]);
         last->next = p;
         last = p;
     }
@@ -164,8 +164,7 @@ void Insert(struct Node *p, int index, int value)
     struct Node *t;
     if (index < 0 && index > CountNode(p))
         return;
-    t = CreateNode();
-    t->data = value;
+    t = CreateNewNode(value);
     size++;
     if (index == 0)
     {
@@ -184,15 +183,56 @@ void Insert(struct Node *p, int index, int value)
         p->next = t;
     }
 }
+// Always Insert At Last
+void InsertAtLast(int value)
+{
+    struct Node *t, *last;
+    t = CreateNewNode(value);
+    if (head == NULL)
+    {
+        head = t;
+        return;
+    }
+    last = head;
+    while (last->next != NULL)
+    {
+        last = last->next;
+    }
+    last->next = t;
+    last = t;
+}
+// Insert a node In Sorted LinkedList
+void InsertSort(struct Node *p, int value)
+{
+    struct Node *t, *q = NULL;
+    t = CreateNewNode(value);
+    if (head == NULL)
+        head = t;
+    else
+    {
+        while (p != NULL && p->data < value)
+        {
+            q = p;
+            p = p->next;
+        }
+        if (p == head)
+        {
+            t->next = head;
+            head = t;
+        }
+        else
+        {
+            t->next = q->next;
+            q->next = t;
+        }
+    }
+}
 int main()
 {
-    Insert(head, 0, 10);
-    Insert(head, 1, 3);
-    Insert(head, 2, 33);
-    Insert(head, 3, 35);
-    Insert(head, 2, 19);
+    int A[] = {10, 20, 30, 40, 50};
+    Create_Using_Array(A, 5);
+    InsertSort(head, 12);
+    InsertSort(head, 12);
     Display(head);
-
-
     return 0;
 }
