@@ -6,23 +6,31 @@ struct Node
     int data;
     struct Node *next;
 } *head = NULL;
-
-void Create(int A[], int n)
+int size = 0;
+struct Node *CreateNode()
 {
-    struct Node *last;
-    head = (struct node *)malloc(sizeof(struct Node));
-    head->data = A[0];
-    head->next = NULL;
+    struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
+    return new_node;
+}
+void Create_Using_Array(int A[], int n)
+{
+    struct Node *t, *last;
+    t = CreateNode();
+    t->data = A[0];
+    t->next = NULL;
+    head = t;
     last = head;
+    size++;
     for (int i = 1; i < n; i++)
     {
-        struct Node *t = (struct node *)malloc(sizeof(struct Node));
-        t->data = A[i];
-        t->next = NULL;
-        last->next = t;
-        last = t;
+        struct Node *p = CreateNode();
+        p->data = A[i];
+        p->next = NULL;
+        last->next = p;
+        last = p;
     }
 }
+
 // Display Linked List
 void Display(struct Node *p)
 {
@@ -156,8 +164,9 @@ void Insert(struct Node *p, int index, int value)
     struct Node *t;
     if (index < 0 && index > CountNode(p))
         return;
-    t = (struct node *)malloc(sizeof(struct Node));
+    t = CreateNode();
     t->data = value;
+    size++;
     if (index == 0)
     {
         t->next = head;
@@ -183,6 +192,7 @@ int main()
     Insert(head, 3, 35);
     Insert(head, 2, 19);
     Display(head);
+
 
     return 0;
 }
