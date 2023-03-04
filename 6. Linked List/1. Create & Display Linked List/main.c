@@ -328,11 +328,24 @@ void ReverseElement(struct Node *p)
     }
 }
 
+// Reverse Linked List using Links
+void ReverseLinks(struct Node *p)
+{
+    struct Node *q = NULL, *r = NULL;
+    while (p != NULL)
+    {
+        r = q;
+        q = p;
+        p = p->next;
+        q->next = r;
+    }
+    head = q;
+}
 int main()
 {
     int A[] = {2, 3, 3, 5, 7, 7, 7, 9, 10, 10};
     Create_Using_Array(A, 10);
-    ReverseElement(head);
+    ReverseLinks(head);
     Display(head);
     return 0;
 }
