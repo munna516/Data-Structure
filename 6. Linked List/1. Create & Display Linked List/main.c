@@ -7,6 +7,7 @@ struct Node
     struct Node *next;
 } *head = NULL;
 int size = 0;
+// Creating A NOde
 struct Node *CreateNewNode(int x)
 {
     struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
@@ -14,6 +15,7 @@ struct Node *CreateNewNode(int x)
     new_node->next = NULL;
     return new_node;
 }
+// Create a Linked List using Array
 void Create_Using_Array(int A[], int n)
 {
     struct Node *t, *last;
@@ -41,6 +43,7 @@ void Display(struct Node *p)
         p = p->next;
     }
 }
+
 // Display using Recursion
 void DisplayRecursion(struct Node *p)
 {
@@ -51,6 +54,7 @@ void DisplayRecursion(struct Node *p)
     }
     printf("\n");
 }
+
 // Display Reverse Using Recursion
 void DisplayReverseRecursion(struct Node *p)
 {
@@ -60,6 +64,7 @@ void DisplayReverseRecursion(struct Node *p)
         printf("%d ", p->data);
     }
 }
+
 // Count of Node
 int CountNode(struct Node *p)
 {
@@ -72,6 +77,7 @@ int CountNode(struct Node *p)
     }
     return c;
 }
+
 // Counting Nodes Using Recursion
 int CountNodeRecursion(struct Node *p)
 {
@@ -80,6 +86,7 @@ int CountNodeRecursion(struct Node *p)
     else
         return CountNodeRecursion(p->next) + 1;
 }
+
 // Sum of All Nodes
 int Add(struct Node *p)
 {
@@ -91,6 +98,7 @@ int Add(struct Node *p)
     }
     return sum;
 }
+
 // Sum of All Nodes Using Recursion
 int AddRecursion(struct Node *p)
 {
@@ -100,6 +108,7 @@ int AddRecursion(struct Node *p)
     else
         return AddRecursion(p->next) + p->data;
 }
+
 // Max Element From Linked List
 int MaxElement(struct Node *p)
 {
@@ -112,6 +121,7 @@ int MaxElement(struct Node *p)
     }
     return max;
 }
+
 // Max Element From Linked List Using Recursion
 int MaxElementRecursion(struct Node *p)
 {
@@ -121,6 +131,7 @@ int MaxElementRecursion(struct Node *p)
     x = MaxElementRecursion(p->next);
     return p->data > x ? p->data : x;
 }
+
 // Search Key
 struct Node *LSearch(struct Node *p, int key)
 {
@@ -132,6 +143,7 @@ struct Node *LSearch(struct Node *p, int key)
     }
     return NULL;
 }
+
 // Recursive Version of Search
 struct Node *RLSearch(struct Node *p, int key)
 {
@@ -141,6 +153,7 @@ struct Node *RLSearch(struct Node *p, int key)
         return p;
     return RLSearch(p->next, key);
 }
+
 // Improving Linear search
 struct Node *ImproveLSearch(struct Node *p, int key)
 {
@@ -159,6 +172,7 @@ struct Node *ImproveLSearch(struct Node *p, int key)
     }
     return NULL;
 }
+
 // Insert a new Node
 void Insert(struct Node *p, int index, int value)
 {
@@ -184,6 +198,7 @@ void Insert(struct Node *p, int index, int value)
         p->next = t;
     }
 }
+
 // Always Insert At Last
 void InsertAtLast(int value)
 {
@@ -202,6 +217,7 @@ void InsertAtLast(int value)
     last->next = t;
     last = t;
 }
+
 // Insert a node In Sorted LinkedList
 void InsertSort(struct Node *p, int value)
 {
@@ -228,6 +244,7 @@ void InsertSort(struct Node *p, int value)
         }
     }
 }
+
 // Deleting Nodes
 int DeleteANode(struct Node *p, int index)
 {
@@ -256,11 +273,66 @@ int DeleteANode(struct Node *p, int index)
         return x;
     }
 }
+
+// Linked List is Sorted Or Not
+int IsSort(struct Node *p)
+{
+    int x = INT_MIN;
+    while (p != NULL)
+    {
+        if (p->data < x)
+            return 0;
+        x = p->data;
+        p = p->next;
+    }
+    return 1;
+}
+
+// Remove Duplicate From Sorted Linked List
+void RemoveDuplicate(struct Node *p)
+{
+    struct Node *q = p->next;
+    while (q != NULL)
+    {
+        if (p->data != q->data)
+        {
+            p = q;
+            q = q->next;
+        }
+        else
+        {
+            p->next = q->next;
+            free(q);
+            q = p->next;
+        }
+    }
+}
+
+// Reversing LinkedList(Element)
+void ReverseElement(struct Node *p)
+{
+    int A[size], i = 0;
+    while (p != NULL)
+    {
+        A[i] = p->data;
+        p = p->next;
+        i++;
+    }
+    p = head;
+    i--;
+    while (p != NULL)
+    {
+        p->data = A[i];
+        i--;
+        p = p->next;
+    }
+}
+
 int main()
 {
-    int A[] = {10, 20, 30, 40, 50};
-    Create_Using_Array(A, 5);
-    DeleteANode(head, 3);
+    int A[] = {2, 3, 3, 5, 7, 7, 7, 9, 10, 10};
+    Create_Using_Array(A, 10);
+    ReverseElement(head);
     Display(head);
     return 0;
 }
