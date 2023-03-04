@@ -25,6 +25,7 @@ void Create_Using_Array(int A[], int n)
     size++;
     for (int i = 1; i < n; i++)
     {
+        size++;
         struct Node *p = CreateNewNode(A[i]);
         last->next = p;
         last = p;
@@ -227,12 +228,39 @@ void InsertSort(struct Node *p, int value)
         }
     }
 }
+// Deleting Nodes
+int DeleteANode(struct Node *p, int index)
+{
+    struct Node *q = NULL;
+    int x = -1;
+    if (index < 1 || index > size)
+        return -1;
+    if (index == 1)
+    {
+        q = head;
+        x = head->data;
+        head = head->next;
+        free(q);
+        return x;
+    }
+    else
+    {
+        for (int i = 0; i < index - 1; i++)
+        {
+            q = p;
+            p = p->next;
+        }
+        q->next = p->next;
+        x = p->data;
+        free(p);
+        return x;
+    }
+}
 int main()
 {
     int A[] = {10, 20, 30, 40, 50};
     Create_Using_Array(A, 5);
-    InsertSort(head, 12);
-    InsertSort(head, 12);
+    DeleteANode(head, 3);
     Display(head);
     return 0;
 }
