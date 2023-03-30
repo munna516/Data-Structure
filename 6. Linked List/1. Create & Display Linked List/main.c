@@ -173,21 +173,29 @@ struct Node *ImproveLSearch(struct Node *p, int key)
     return NULL;
 }
 
+// Always insert At Head
+void InsertAtFirst(int value)
+{
+    struct Node *a = CreateNewNode(value);
+    size++;
+    a->next = head;
+    head = a;
+}
+
 // Insert a new Node
 void Insert(struct Node *p, int index, int value)
 {
     struct Node *t;
     if (index < 0 && index > CountNode(p))
         return;
-    t = CreateNewNode(value);
-    size++;
     if (index == 0)
     {
-        t->next = head;
-        head = t;
+        InsertAtFirst(value);
     }
     else
     {
+        t = CreateNewNode(value);
+        size++;
         int current_index = 0;
         while (current_index != index - 1)
         {
@@ -222,11 +230,12 @@ void InsertAtLast(int value)
 void InsertSort(struct Node *p, int value)
 {
     struct Node *t, *q = NULL;
-    t = CreateNewNode(value);
     if (head == NULL)
-        head = t;
+        InsertAtFirst(value);
     else
     {
+        t = CreateNewNode(value);
+        size++;
         while (p != NULL && p->data < value)
         {
             q = p;
@@ -343,9 +352,5 @@ void ReverseLinks(struct Node *p)
 }
 int main()
 {
-    int A[] = {2, 3, 3, 5, 7, 7, 7, 9, 10, 10};
-    Create_Using_Array(A, 10);
-    ReverseLinks(head);
-    Display(head);
     return 0;
 }
