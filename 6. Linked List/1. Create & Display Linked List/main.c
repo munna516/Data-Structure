@@ -254,32 +254,39 @@ void InsertSort(struct Node *p, int value)
     }
 }
 
-// Deleting Nodes
-int DeleteANode(struct Node *p, int index)
+// Delete First Node
+void DeleteFirstNode()
 {
-    struct Node *q = NULL;
+    struct Node *q;
+    q = head;
+    head = q->next;
+    size--;
+    free(q);
+}
+
+// Delete a Node From Linked List
+void DeleteNode(struct Node *p, int index)
+{
+    struct node *q = NULL;
     int x = -1;
-    if (index < 1 || index > size)
-        return -1;
-    if (index == 1)
-    {
-        q = head;
-        x = head->data;
-        head = head->next;
-        free(q);
-        return x;
-    }
+    if (index < 0 || index > size)
+        return;
+    if (index == 0)
+        DeleteFirstNode();
     else
     {
-        for (int i = 0; i < index - 1; i++)
+        struct Node *a;
+        int current_index = 0;
+        while (current_index != index - 1)
         {
-            q = p;
             p = p->next;
+            current_index++;
         }
-        q->next = p->next;
-        x = p->data;
-        free(p);
-        return x;
+        a = p->next;
+        p->next = a->next;
+        x = a->data;
+        free(a);
+        size--;
     }
 }
 
