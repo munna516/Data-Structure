@@ -234,6 +234,7 @@ void InsertAtLast(int value)
 {
     struct Node *t, *last;
     t = CreateNewNode(value);
+    size++;
     if (first == NULL)
     {
         first = t;
@@ -289,7 +290,6 @@ void DeleteFirstNode()
 // Delete a Node From Linked List
 void DeleteNode(struct Node *p, int index)
 {
-    struct node *q = NULL;
     int x = -1;
     if (index < 0 || index > size)
         return;
@@ -439,17 +439,24 @@ void MergeLinkedTwoList(struct Node *p, struct Node *q)
     else
         last->next = q;
 }
+
+// Checking Linked List have Loop or Not
+int CheckLoop(struct Node *f)
+{
+    struct Node *p, *q;
+    p = q = f;
+    do
+    {
+        p = p->next;
+        q = q->next;
+        q = (q != NULL) ? q->next : NULL;
+    } while (p != NULL && q != NULL && p != q);
+    return (p == q) ? 1 : 0;
+}
+
+/* This Is Main Function. */
 int main()
 {
-    int A[] = {10, 20, 30, 40, 50};
-    Create_Using_Array1(A, 5);
-    int B[] = {5, 152, 252, 352 ,6067};
-    Create_Using_Array2(B, 5);
-    printf("First Linked List : ");
-    Display(first);
-    printf("Second Linked List : ");
-    Display(second);
-    MergeLinkedTwoList(first, second);
-    Display(third);
+
     return 0;
 }
