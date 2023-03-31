@@ -5,8 +5,9 @@ struct Node
 {
     int data;
     struct Node *next;
-} *head = NULL;
+} *first = NULL, *second = NULL, *third = NULL;
 int size = 0;
+
 // Creating A NOde
 struct Node *CreateNewNode(int x)
 {
@@ -15,15 +16,35 @@ struct Node *CreateNewNode(int x)
     new_node->next = NULL;
     return new_node;
 }
-// Create a Linked List using Array
-void Create_Using_Array(int A[], int n)
+
+// Create a Linked List using Array (First)
+void Create_Using_Array1(int A[], int n)
 {
     struct Node *t, *last;
     t = (struct Node *)malloc(sizeof(struct Node));
     t->data = A[0];
     t->next = NULL;
-    head = t;
-    last = head;
+    first = t;
+    last = first;
+    size++;
+    for (int i = 1; i < n; i++)
+    {
+        size++;
+        struct Node *p = CreateNewNode(A[i]);
+        last->next = p;
+        last = p;
+    }
+}
+
+// Create a Linked List using Array (Second)
+void Create_Using_Array2(int A[], int n)
+{
+    struct Node *t, *last;
+    t = (struct Node *)malloc(sizeof(struct Node));
+    t->data = A[0];
+    t->next = NULL;
+    second = t;
+    last = second;
     size++;
     for (int i = 1; i < n; i++)
     {
@@ -42,6 +63,7 @@ void Display(struct Node *p)
         printf("%d  ", p->data);
         p = p->next;
     }
+    printf("\n");
 }
 
 // Display using Recursion
@@ -68,7 +90,7 @@ void DisplayReverseRecursion(struct Node *p)
 // Count of Node
 int CountNode(struct Node *p)
 {
-    p = head;
+    p = first;
     int c = 0;
     while (p != NULL)
     {
@@ -163,8 +185,8 @@ struct Node *ImproveLSearch(struct Node *p, int key)
         if (p->data == key)
         {
             q->next = p->next;
-            p->next = head;
-            head = p;
+            p->next = first;
+            first = p;
             return p;
         }
         q = p;
@@ -173,13 +195,13 @@ struct Node *ImproveLSearch(struct Node *p, int key)
     return NULL;
 }
 
-// Always insert At Head
+// Always insert At first
 void InsertAtFirst(int value)
 {
     struct Node *a = CreateNewNode(value);
     size++;
-    a->next = head;
-    head = a;
+    a->next = first;
+    first = a;
 }
 
 // Insert a new Node
@@ -212,12 +234,12 @@ void InsertAtLast(int value)
 {
     struct Node *t, *last;
     t = CreateNewNode(value);
-    if (head == NULL)
+    if (first == NULL)
     {
-        head = t;
+        first = t;
         return;
     }
-    last = head;
+    last = first;
     while (last->next != NULL)
     {
         last = last->next;
@@ -230,7 +252,7 @@ void InsertAtLast(int value)
 void InsertSort(struct Node *p, int value)
 {
     struct Node *t, *q = NULL;
-    if (head == NULL)
+    if (first == NULL)
         InsertAtFirst(value);
     else
     {
@@ -241,10 +263,10 @@ void InsertSort(struct Node *p, int value)
             q = p;
             p = p->next;
         }
-        if (p == head)
+        if (p == first)
         {
-            t->next = head;
-            head = t;
+            t->next = first;
+            first = t;
         }
         else
         {
@@ -258,8 +280,8 @@ void InsertSort(struct Node *p, int value)
 void DeleteFirstNode()
 {
     struct Node *q;
-    q = head;
-    head = q->next;
+    q = first;
+    first = q->next;
     size--;
     free(q);
 }
@@ -334,7 +356,7 @@ void ReverseElement(struct Node *p)
         p = p->next;
         i++;
     }
-    p = head;
+    p = first;
     i--;
     while (p != NULL)
     {
@@ -355,9 +377,79 @@ void ReverseLinks(struct Node *p)
         p = p->next;
         q->next = r;
     }
-    head = q;
+    first = q;
+}
+
+// Reverse Linked List Using Recursion
+void ReverseLinkRecursion(struct Node *p, struct Node *q)
+{
+    if (p)
+    {
+        ReverseLinkRecursion(p->next, p);
+        p->next = q;
+    }
+    else
+        first = q;
+}
+
+// Concatenate Two Linkedlist
+void ConcatenateLinkedList(struct Node *p, struct Node *q)
+{
+    third = p;
+    while (p->next != NULL)
+        p = p->next;
+    p->next = q;
+}
+
+// Merger Two Linked List (Tow Linked List Must Be Sorted)
+void MergeLinkedTwoList(struct Node *p, struct Node *q)
+{
+    struct Node *last = NULL;
+    if (p->data < q->data)
+    {
+        third = last = p;
+        p = p->next;
+        last->next = NULL;
+    }
+    else
+    {
+        third = last = q;
+        q = q->next;
+        last->next = NULL;
+    }
+    while (p && q)
+    {
+        if (p->data < q->data)
+        {
+            last->next = p;
+            last = p;
+            p = p->next;
+            last->next = NULL;
+        }
+        else
+        {
+            last->next = q;
+            last = q;
+            q = q->next;
+            last->next = NULL;
+        }
+    }
+    if (p != NULL)
+        last->next = p;
+    else
+        last->next = q;
 }
 int main()
 {
+    int A[] = {10, 20, 30, 40, 50};
+    Create_Using_Array1(A, 5);
+    int B[] = {5, 152, 252, 352 ,6067};
+    Create_Using_Array2(B, 5);
+    printf("First Linked List : ");
+    Display(first);
+    printf("Second Linked List : ");
+    Display(second);
+    MergeLinkedTwoList(first, second);
+    Display(third);
     return 0;
 }
