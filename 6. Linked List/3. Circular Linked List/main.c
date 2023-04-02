@@ -6,6 +6,7 @@ struct node
     struct node *next;
 } *head;
 int count_of_node = 0;
+
 // Display Circualr Linked List
 void Display(struct node *p)
 {
@@ -35,6 +36,19 @@ void CreateCircualrLinkList(int A[], int n)
         last->next = t;
         last = t;
     }
+}
+
+// Length of circular Linked List
+int length()
+{
+    struct node *p = head;
+    int count = 0;
+    do
+    {
+        p = p->next;
+        count++;
+    } while (p != head);
+    return count;
 }
 
 // Display Circualr Linked List Using Recursion
@@ -96,14 +110,52 @@ void Insert(struct node *p, int index, int value)
         p->next = t;
     }
 }
+// Delete At Head
+void DeleteAtHead()
+{
+    int x;
+    struct node *p = head;
+    while (p->next != head)
+    {
+        p = p->next;
+    }
+    p->next = head->next;
+    x = head->data;
+    free(head);
+    count_of_node--;
+    head = p->next;
+}
+// Delete A node From Circualr Linked List
+void Delete(struct node *p, int index)
+{
+    if (index < 0 || index > count_of_node)
+        return;
+    if (index == 0)
+        DeleteAtHead();
+    else
+    {
+        int x;
+        struct node *a;
+        for (int i = 0; i < index - 1; i++)
+        {
+            p = p->next;
+        }
+        a = p->next;
+        p->next = a->next;
+        x = a->data;
+        count_of_node--;
+        free(a);
+    }
+}
+/*This is the Main Function */
 int main()
 {
-    // int A[] = {2, 4, 6, 8, 10, 12};
-    // CreateCircualrLinkList(A, 6);
     Insert(head, 0, 100);
     Insert(head, 1, 200);
     Insert(head, 2, 300);
     Insert(head, 3, 400);
-    Display(head);
+    Insert(head, 4, 500);
+    Insert(head, 5, 600);
+
     return 0;
 }
