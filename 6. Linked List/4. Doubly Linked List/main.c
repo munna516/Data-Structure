@@ -6,11 +6,12 @@ struct node
     int data;
     struct node *next;
 } *head = NULL;
-
+int num_of_nodes = 0;
 // Create a New Node
 struct node *CreateNewNode(int value)
 {
     struct node *t = (struct node *)malloc(sizeof(struct node));
+    num_of_nodes++;
     t->prev = NULL;
     t->data = value;
     t->next = NULL;
@@ -39,6 +40,7 @@ int length(struct node *p)
     }
     return count;
 }
+
 // Creating a Doubly Linked List Using Array
 void CreateDoubleLinkedList(int A[], int n)
 {
@@ -54,11 +56,49 @@ void CreateDoubleLinkedList(int A[], int n)
     }
 }
 
+// Insert At Head
+void InsertAtHead(int value)
+{
+    struct node *t;
+    if (head == NULL)
+    {
+        t = CreateNewNode(value);
+        head = t;
+    }
+    else
+    {
+        t = CreateNewNode(value);
+        t->next = head;
+        head->prev = t;
+        head = t;
+    }
+}
+// Insert A New Node
+void Insert(struct node *p, int index, int value)
+{
+    struct node *t;
+    if (index < 0 || index > num_of_nodes)
+        return;
+
+    if (index == 0)
+        InsertAtHead(value);
+    else
+    {
+        for (int i = 0; i < index - 1; i++)
+        {
+            p = p->next;
+        }
+        t = CreateNewNode(value);
+        t->prev = p;
+        t->next = p->next;
+        if (p->next)
+            p->next->prev = t;
+        p->next = t;
+    }
+}
 int main()
 {
-    int A[] = {1, 7, 2, 4, 5, 9, 8};
-    CreateDoubleLinkedList(A, 7);
-    Display(head);
-    printf("%d ",length(head));
+
+    
     return 0;
 }
