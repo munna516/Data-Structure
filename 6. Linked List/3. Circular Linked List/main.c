@@ -45,8 +45,8 @@ int length()
     int count = 0;
     do
     {
-        p = p->next;
         count++;
+        p = p->next;
     } while (p != head);
     return count;
 }
