@@ -2,7 +2,7 @@
 #include <stdlib.h>
 struct node
 {
-    struct node *prev;
+    struct node *previous;
     int data;
     struct node *next;
 } *head = NULL;
@@ -12,7 +12,7 @@ struct node *CreateNewNode(int value)
 {
     struct node *t = (struct node *)malloc(sizeof(struct node));
     num_of_nodes++;
-    t->prev = NULL;
+    t->previous = NULL;
     t->data = value;
     t->next = NULL;
     return t;
@@ -51,7 +51,7 @@ void CreateDoubleLinkedList(int A[], int n)
     {
         t = CreateNewNode(A[i]);
         last->next = t;
-        t->prev = last;
+        t->previous = last;
         last = t;
     }
 }
@@ -69,7 +69,7 @@ void InsertAtHead(int value)
     {
         t = CreateNewNode(value);
         t->next = head;
-        head->prev = t;
+        head->previous = t;
         head = t;
     }
 }
@@ -89,16 +89,76 @@ void Insert(struct node *p, int index, int value)
             p = p->next;
         }
         t = CreateNewNode(value);
-        t->prev = p;
+        t->previous = p;
         t->next = p->next;
         if (p->next)
-            p->next->prev = t;
+            p->next->previous = t;
         p->next = t;
+    }
+}
+
+// Delete First Node
+void DeleteAtFirst()
+{
+    head->next->previous = NULL;
+    head = head->next;
+    num_of_nodes--;
+}
+
+// Delete At Node
+void Delete(struct node *p, int index)
+{
+    struct node *a;
+
+    if (index < 0 || index > num_of_nodes)
+        return;
+    if (index == 0)
+        DeleteAtFirst();
+    else
+    {
+        for (int i = 0; i < index - 1; i++)
+        {
+            p = p->next;
+        }
+        if (p->next->next == NULL)
+        {
+            p->next = NULL;
+            num_of_nodes--;
+        }
+        else
+        {
+            a = p->next;
+            p->next = a->next;
+            p->previous = a->previous;
+            num_of_nodes--;
+        }
+    }
+}
+
+// Reverse Doubly A Linked List
+void Reverse(struct node *p)
+{
+    struct node *temp;
+    while (p != NULL)
+    {
+        temp = p->next;
+        p->next = p->previous;
+        p->previous = temp;
+        p = p->previous;
+        if (p!=NULL && p->next == NULL)
+            head = p;
     }
 }
 int main()
 {
-
-    
+    Insert(head, 0, 100);
+    Insert(head, 1, 200);
+    Insert(head, 2, 300);
+    Insert(head, 3, 400);
+    Insert(head, 4, 500);
+    Reverse(head);
+    Display(head);
     return 0;
 }
+
+/* NULL <- head ->100 -> <- 200 -> <- 300 -> <- 400 -> <- 500-> NULL */

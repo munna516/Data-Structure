@@ -454,6 +454,20 @@ int CheckLoop(struct Node *f)
     return (p == q) ? 1 : 0;
 }
 
+// Finding Middle of a Linked List
+void Middle(struct Node *p)
+{
+    struct Node *q = first;
+    while (q)
+    {
+        q = q->next;
+        if (q)
+            q = q->next;
+        if (q)
+            p = p->next;
+    }
+}
+
 /* This Is Main Function. */
 int main()
 {
