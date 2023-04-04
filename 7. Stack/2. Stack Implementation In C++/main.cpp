@@ -14,7 +14,7 @@ public:
         stack_size = 0;
     }
 
-    // Adding Element At Stack
+    // Adding Element At Stack. O(1)
     void push(int value)
     {
         if (stack_size + 1 > max_size)
@@ -26,7 +26,7 @@ public:
         A[stack_size - 1] = value;
     }
 
-    // Deleting Element At a Stack
+    // Deleting Element At a Stack. O(1)
     void pop()
     {
         if (stack_size == 0)
@@ -38,7 +38,7 @@ public:
         stack_size--;
     }
 
-    // Top Element
+    // Top Element. O(1)
     int Top()
     {
         if (stack_size == 0)
@@ -61,7 +61,7 @@ public:
         stack_size = 0;
     }
 
-    // Increasing Array
+    // Increasing Array. O(1)
     void Increase_Array()
     {
         int *temp;
@@ -73,7 +73,7 @@ public:
         array_cap = array_cap * 2;
     }
 
-    // Adding Element At Stack
+    // Adding Element At Stack. O(1)
     void push(int value)
     {
         if (stack_size + 1 > array_cap)
@@ -84,7 +84,7 @@ public:
         A[stack_size - 1] = value;
     }
 
-    // Deleting Element At a Stack
+    // Deleting Element At a Stack.O(1)
     void pop()
     {
         if (stack_size == 0)
@@ -96,7 +96,7 @@ public:
         stack_size--;
     }
 
-    // Top Element
+    // Top Element. O(1)
     int Top()
     {
         if (stack_size == 0)
