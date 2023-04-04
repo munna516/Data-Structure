@@ -51,12 +51,12 @@ int pop(struct Stack *s)
 }
 
 // Peak a particular Index
-int peek(struct Stack s, int index)
+int peek(struct Stack s, int pos)
 {
     int x = -1;
-    if (s.top - index < 0)
+    if (s.top - pos < 0)
         printf("Invalid Index\n");
-    x = s.A[s.top - index + 1];
+    x = s.A[s.top - pos + 1];
     return x;
 }
 
