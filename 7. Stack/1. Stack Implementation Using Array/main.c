@@ -54,7 +54,7 @@ int pop(struct Stack *s)
 int peek(struct Stack s, int pos)
 {
     int x = -1;
-    if (s.top - pos < 0)
+    if (s.top - pos + 1 < 0)
         printf("Invalid Index\n");
     x = s.A[s.top - pos + 1];
     return x;
