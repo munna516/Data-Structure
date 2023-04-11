@@ -19,7 +19,7 @@ void Display()
     printf("\n");
 }
 
-// Pushing in Stack
+// Pushing in the Stack
 void push(char x)
 {
     struct node *t = (struct node *)malloc(sizeof(struct node));
@@ -140,7 +140,6 @@ int main()
     char *infix = "a+b*c/d-c*b";
     push('#');
     char *postfix = InfixToPostfix(infix);
-    printf("%s ", postfix);
-
+    printf("%s\n", postfix);
     return 0;
 }
