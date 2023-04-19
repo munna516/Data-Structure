@@ -127,6 +127,7 @@ char *InfixToPostfix(char *infix)
             }
         }
     }
+
     while (top != NULL)
     {
         postfix[j++] = pop();
@@ -137,7 +138,7 @@ char *InfixToPostfix(char *infix)
 
 int main()
 {
-    char *infix = "a+b*c/d-c*b";
+    char *infix = "a+b*c/d-c*b/2*c+2/6";
     push('#');
     char *postfix = InfixToPostfix(infix);
     printf("%s\n", postfix);
