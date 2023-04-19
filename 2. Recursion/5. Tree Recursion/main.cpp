@@ -1,4 +1,4 @@
-#include <iostream>
+#include<bits/stdc++.h>
 using namespace std;
 void fun(int x)
 {
@@ -15,4 +15,4 @@ int main()
     fun(r);
     return 0;
 }
-/*Indirect Recursion has more than one function & it called each other circular fashion*/
+/* Indirect Recursion has more than one function & it called each other circular fashion*/
