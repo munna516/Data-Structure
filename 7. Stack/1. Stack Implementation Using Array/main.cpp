@@ -1,119 +1,107 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int max_size = 500;
-
-// Stack Implementaion Using Static Array
-class Stack_Static_Array
+class Stack
 {
 public:
-    int A[max_size];
-    int stack_size;
-    // Constructor
-    Stack_Static_Array()
+    int size;
+    int top;
+    int *s;
+    Stack()
     {
-        stack_size = 0;
+        size = 0;
     }
 
-    // Adding Element At Stack. O(1)
+    // Creating Stack
+    void CreateStack()
+    {
+        cout << "Enter the size of stack : ";
+        cin >> size;
+        s = new int[size];
+        top = -1;
+    }
+
+    // display
+    void display()
+    {
+        for (int i = top; i >= 0; i--)
+            cout << s[i] << " ";
+        cout << endl;
+    }
+
+    // Pushing element
     void push(int value)
     {
-        if (stack_size + 1 > max_size)
+        if (top == size - 1)
+            cout << "Stack is full" << endl;
+        else
         {
-            cout << "Stack is Full" << endl;
-            return;
+            top++;
+            s[top] = value;
         }
-        stack_size++;
-        A[stack_size - 1] = value;
     }
 
-    // Deleting Element At a Stack. O(1)
-    void pop()
+    // Pop Element
+    int pop()
     {
-        if (stack_size == 0)
+        int x = -1;
+        if (top == -1)
+            cout << "Stack is Empty!!" << endl;
+        else
         {
-            cout << "Stack is Empty!" << endl;
-            return;
+            x = s[top];
+            top--;
         }
-        A[stack_size - 1] = 0;
-        stack_size--;
+        return x;
     }
 
-    // Top Element. O(1)
-    int Top()
+    // Peek a particular index
+    int peek(int pos)
     {
-        if (stack_size == 0)
+        int x = top - pos + 1;
+        if (x < 0)
+            cout << "Invalid Index" << endl;
+        else
+            return s[x];
+    }
+
+    // Top Element
+    int top_element()
+    {
+        if (top == -1)
             return -1;
-        return A[stack_size - 1];
-    }
-};
-
-// Stack Implementation Using Dynamic Array
-class Stack_Dynamic_Array
-{
-public:
-    int *A;
-    int array_cap;
-    int stack_size;
-    Stack_Dynamic_Array()
-    {
-        A = new int[1];
-        array_cap = 1;
-        stack_size = 0;
+        else
+            return s[top];
     }
 
-    // Increasing Array. O(1)
-    void Increase_Array()
+    // stack is empty
+    int isEmpty()
     {
-        int *temp;
-        temp = new int[array_cap * 2];
-        for (int i = 0; i < array_cap; i++)
-            temp[i] = A[i];
-        swap(A, temp);
-        delete[] temp;
-        array_cap = array_cap * 2;
+        if (top == -1)
+            return 1;
+        else
+            return 0;
     }
-
-    // Adding Element At Stack. O(1)
-    void push(int value)
+    // Stack is Full
+    int isFull()
     {
-        if (stack_size + 1 > array_cap)
-        {
-            Increase_Array();
-        }
-        stack_size++;
-        A[stack_size - 1] = value;
-    }
-
-    // Deleting Element At a Stack.O(1)
-    void pop()
-    {
-        if (stack_size == 0)
-        {
-            cout << "Stack is Empty!" << endl;
-            return;
-        }
-        A[stack_size - 1] = 0;
-        stack_size--;
-    }
-
-    // Top Element. O(1)
-    int Top()
-    {
-        if (stack_size == 0)
-            return -1;
-        return A[stack_size - 1];
+        if (top == size - 1)
+            return 1;
+        else
+            return 0;
     }
 };
 
 int main()
 {
-    Stack_Dynamic_Array st;
-    st.push(100);
-    cout << st.Top() << endl;
+    Stack st;
+    st.CreateStack();
+    st.push(10);
     st.push(20);
     st.push(30);
-    cout << st.Top() << endl;
-    st.pop();
-    cout << st.Top() << endl;
+    st.push(40);
+    st.push(50);
+    st.push(60);
+    st.push(70);
+
     return 0;
 }
