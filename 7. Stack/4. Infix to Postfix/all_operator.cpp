@@ -84,20 +84,14 @@ public:
     // Check operator or operand
     int isOperand(char x)
     {
-        if (x == '+' || x == '-' || x == '*' || x == '/' || x == '^')
+        if (x == '+' || x == '-' || x == '*' || x == '/' || x == '^'||x=='('||x==')')
             return 0;
         else
             return 1;
     }
 
-    // Check Operator or not
-    int isOperator(char ch)
-    {
-        return (ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^');
-    }
-
     // Convert Infix to postfix
-    char *infixTopostfix(char *infix)
+    char *infixToPostfix(char *infix)
     {
         char *postfix;
         int len = strlen(infix);
@@ -105,12 +99,6 @@ public:
         int i = 0, j = 0;
         while (infix[i] != '\0')
         {
-            if (infix[i] == ' ' || infix[i] == '\t')
-            {
-                ++i;
-                continue;
-            }
-
             if (isOperand(infix[i]))
                 postfix[j++] = infix[i++];
 
@@ -121,46 +109,31 @@ public:
             {
                 while (top > -1 && top_element() != '(')
                 {
-                    postfix[j++] = pop();
+                    postfix[j++] = top_element();
+                    pop();
                 }
-                // i++;
-                if (top > -1 && s[top] != '(')
-                    return "Invalid Expression";
-                else
-                    top--;
+                pop();
+                i++;
             }
 
-            // else
-            // {
-            //     if (pre(infix[i]) > pre(s[top]))
-            //         push(infix[i++]);
-            //     else
-            //         postfix[j++] = pop();
-            // }
-
-            else if (isOperator(infix[i]))
+            else
             {
                 while (top > -1 && pre(top_element()) >= pre(infix[i]))
-                    postfix[j++] = pop();
+                {
+                    postfix[j++] = top_element();
+                    pop();
+                }
                 push(infix[i++]);
             }
         }
-        // while (!isEmpty())
-        // {
-        //     postfix[j++] = pop();
-        // }
-        // postfix[j] = '\0';
-
-        while (top > -1)
+        while (!isEmpty())
         {
-            if (top_element() == '(')
-            {
-                return "Invalid Expression";
-            }
-            postfix[j++] = pop();
+            postfix[j++] = top_element();
+            pop();
         }
         postfix[j] = '\0';
-        return postfix;
+
+         return postfix;
     }
 };
 
@@ -169,7 +142,7 @@ int main()
     char *infix = "a+b*(c^d-e)^(f+g*h)-i";
     int len = strlen(infix);
     Stack st(len);
-    char *postfix = st.infixTopostfix(infix);
+    char *postfix = st.infixToPostfix(infix);
     cout << postfix << endl;
 
     return 0;
