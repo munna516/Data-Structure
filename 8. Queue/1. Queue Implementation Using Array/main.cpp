@@ -5,32 +5,32 @@ class Queue
 private:
     int size;
     int front;
-    int rare;
+    int rear;
     int *Q;
 
 public:
     Queue(int size)
     {
         this->size = size;
-        front = rare = -1;
+        front = rear = -1;
         Q = new int[this->size];
     }
 
     void display()
     {
-        for (int i = front + 1; i <= rare; i++)
+        for (int i = front + 1; i <= rear; i++)
             printf("%d ", Q[i]);
         printf("\n");
     }
     // Inserting in queue
     void enqueue(int x)
     {
-        if (rare == size - 1)
+        if (rear == size - 1)
             printf("Queue is Full\n");
         else
         {
-            rare++;
-            Q[rare] = x;
+            rear++;
+            Q[rear] = x;
         }
     }
 
@@ -38,7 +38,7 @@ public:
     int dequeue()
     {
         int x = -1;
-        if (rare == front)
+        if (rear == front)
             printf("Queue is Empty!!\n");
         else
         {

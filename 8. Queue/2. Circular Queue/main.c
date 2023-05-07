@@ -14,25 +14,30 @@ void CreateQueue(struct Queue *q, int size)
 
     q->size = size;
     q->Q = (int *)malloc(q->size * sizeof(int));
-    q->front = -1;
-    q->rear = -1;
+    q->front = 0;
+    q->rear = 0;
 }
 
 // Display Queue
 void display(struct Queue q)
 {
-    for (int i = q.front + 1; i <= q.rear; i++)
+    int i = q.front + 1;
+    do
+    {
         printf("%d ", q.Q[i]);
+        i = (i + 1) % q.size;
+    } while (i != (q.rear + 1) % q.size);
+
     printf("\n");
 }
 // Inserting in queue
 void enqueue(struct Queue *q, int x)
 {
-    if (q->rear == q->size - 1)
+    if ((q->rear + 1) % q->size == q->front)
         printf("Queue is Full\n");
     else
     {
-        q->rear++;
+        q->rear = (q->rear + 1) % q->size;
         q->Q[q->rear] = x;
     }
 }
@@ -45,7 +50,7 @@ int dequeue(struct Queue *q)
         printf("Queue is Empty!!\n");
     else
     {
-        q->front++;
+        q->front = (q->front + 1) % q->size;
         x = q->Q[q->front];
     }
     return x;
@@ -59,7 +64,10 @@ int main()
     enqueue(&q, 50);
     enqueue(&q, 70);
     enqueue(&q, 80);
+    enqueue(&q, 90);
+    enqueue(&q, 100);
+    enqueue(&q, 810);
     display(q);
-    printf("%d\n", dequeue(&q));
+
     return 0;
 }
