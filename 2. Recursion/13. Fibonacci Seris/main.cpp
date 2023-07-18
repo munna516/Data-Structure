@@ -10,7 +10,7 @@ int fib1(int n) // using loop
     {
         res = t0 + t1;
         t0 = t1;
-        t1 = res;
+        t1 = res; 
     }
     return res;
 }

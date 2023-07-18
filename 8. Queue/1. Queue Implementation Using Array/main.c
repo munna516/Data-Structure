@@ -11,7 +11,6 @@ struct Queue
 // Creating Queue
 void CreateQueue(struct Queue *q, int size)
 {
-
     q->size = size;
     q->Q = (int *)malloc(q->size * sizeof(int));
     q->front = -1;
