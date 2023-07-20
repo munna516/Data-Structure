@@ -45,3 +45,33 @@
 
 ** If nodes is given the minimum height is h = log2(n+1) -1
 ** If nodes is given the maximum height is h = n-1
+
+## Height of a Binary Tree  log2(n+1)-1 <= h <+ n-1
+## Number of nodes in Binary Tree h+1 <= n <= (2^h+1)-1
+
+** In Binary tree degree(0) = degree(2)+1
+
+
+                             Strict/Proper/Complete Binary Tree 
+
+** A node must have degree (0) or degree(2) 
+
+** if h is given the minimum number of nodes n = 2*h +1
+** if h is given the maximum number of nodes n = (2^h+1)-1
+
+** if n is given the minimum height h = log2(n+1)-1   
+** if n is given the maximum height h = (n-1)/2
+
+** Number of external nodes = internal nodes + 1
+
+
+                             n-ary Tree
+** Every Node can have 0-n number of nodes but not greater then n.
+** Strict n-ary tree must have 0 or n nodes for each node.
+
+** For strict m-ary trees 
+   # if height is given minimum nodes is n = m*h+1
+   # if height is given maximum nodes is n = (m^h+1)-1/(m-1)
+
+   # if nodes is given minimum height is n = log base m [n*(m-1)+1]-1
+   # if height is given maximum nodes is h = (n-1)/m 
