@@ -1,3 +1,5 @@
+****************************   Binary Tree   ************************
+
 ** A tree is a nonlinear hierarchical data structure that consists of nodes connected by edges.
 
 ** if there are n nodes then the number of edges is n-1.
@@ -52,7 +54,7 @@
 ** In Binary tree degree(0) = degree(2)+1
 
 
-                             Strict/Proper/Complete Binary Tree 
+*************************** Strict/Proper/Complete Binary Tree   ********************** 
 
 ** A node must have degree (0) or degree(2) 
 
@@ -65,7 +67,8 @@
 ** Number of external nodes = internal nodes + 1
 
 
-                             n-ary Tree
+********************************* n-ary Tree  ***************************
+
 ** Every Node can have 0-n number of nodes but not greater then n.
 ** Strict n-ary tree must have 0 or n nodes for each node.
 
@@ -75,3 +78,17 @@
 
    # if nodes is given minimum height is n = log base m [n*(m-1)+1]-1
    # if height is given maximum nodes is h = (n-1)/m 
+
+   ## Number of external nodes = (m-1)*i +1
+
+
+
+
+***************************  Representing Binary Tree  ***********************
+
+** if element is at index i then the 
+    ## left child at index = 2*i
+    ## Right child at index = 2*i +1
+    ## parent of any node = i/2
+
+** if there are n nodes then there is n+1 null 
