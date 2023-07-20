@@ -1,0 +1,47 @@
+** A tree is a nonlinear hierarchical data structure that consists of nodes connected by edges.
+
+** if there are n nodes then the number of edges is n-1.
+
+** First Node on the top is root node.
+
+** The node which is a predecessor of a node is called the parent node of that node.
+
+** The node which is the immediate successor of a node is called the child node of that node
+
+** Siblings are the children of same parent.
+
+** Any successor node on the path from the that node to leaf node is called decendent
+
+** Any predecessor nodes on the path of the root to that node are called Ancestors of that node
+
+** Degree of a node is the immediate children of that node.
+
+** Degree of a tree is the maximum degree of a node.
+
+** Nodes that is degree is 0 is called leaf nodes/external nodes.
+
+** Nodes that is degree is greater then 0  is called non leaf nodes/internal nodes.
+
+** Levels of a node is the maximum path to go the leaf node.
+
+** Depth is the number of edges from root node to that node.
+
+** Height of a node is the number of edges in the longest path from that node to a leaf node. 
+
+                           Unleveled nodes
+** If n number of nodes are given then the (2nCn)/(n+1) number of binary trees are generated. This the combination formula of catalan Number .
+
+** Summation of i=1 to n  then T(i-1)*T(n-i). This is the recursive formula of catalan number.
+
+** if n nodes are given then the 2^n-1 number of binary trees are possible with maximum height.
+
+                           Leveled Nodes
+** If n number of nodes are given then the (2nCn)/(n+1) * n! number of binary trees are generated.
+
+
+                            Heights Vs nodes
+** If Height is given the minimum number of nodes n = h+1
+** If Height is given the maximum number of nodes n = (2^h+1) -1
+
+** If nodes is given the minimum height is h = log2(n+1) -1
+** If nodes is given the maximum height is h = n-1
