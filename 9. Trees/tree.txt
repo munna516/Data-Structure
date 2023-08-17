@@ -1,4 +1,4 @@
-****************************   Binary Tree   ************************
+****************************   Binary Tree   **********************************
 
 ** A tree is a nonlinear hierarchical data structure that consists of nodes connected by edges.
 
@@ -14,7 +14,7 @@
 
 ** Any successor node on the path from the that node to leaf node is called decendent
 
-** Any predecessor nodes on the path of the root to that node are called Ancestors of that node
+** Any predecessor nodes on the path of the root node  to that node are called Ancestors of that node
 
 ** Degree of a node is the immediate children of that node.
 
@@ -22,26 +22,34 @@
 
 ** Nodes that is degree is 0 is called leaf nodes/external nodes.
 
-** Nodes that is degree is greater then 0  is called non leaf nodes/internal nodes.
+** Nodes that is degree is greater then 0  is called non-leaf nodes/internal nodes.
 
 ** Levels of a node is the maximum path to go the leaf node.
 
 ** Depth is the number of edges from root node to that node.
 
-** Height of a node is the number of edges in the longest path from that node to a leaf node. 
+** Height of a node is the number of edges in the longest path from that node to a leaf node.
 
-                           Unleveled nodes
+
+
+
+*************************** Unleveled nodes ***************************  
+
 ** If n number of nodes are given then the (2nCn)/(n+1) number of binary trees are generated. This the combination formula of catalan Number .
 
 ** Summation of i=1 to n  then T(i-1)*T(n-i). This is the recursive formula of catalan number.
 
 ** if n nodes are given then the 2^n-1 number of binary trees are possible with maximum height.
 
-                           Leveled Nodes
-** If n number of nodes are given then the (2nCn)/(n+1) * n! number of binary trees are generated.
 
 
-                            Heights Vs nodes
+*************************** Leveled Nodes  ***************************
+
+** If n number of nodes are given then the (2nCn)/(n+1) * n! number of binary trees are generated for leveled Nodes.
+
+
+
+*******************************  Heights Vs nodes  ************************************
 ** If Height is given the minimum number of nodes n = h+1
 ** If Height is given the maximum number of nodes n = (2^h+1) -1
 
@@ -51,20 +59,22 @@
 ## Height of a Binary Tree  log2(n+1)-1 <= h <+ n-1
 ## Number of nodes in Binary Tree h+1 <= n <= (2^h+1)-1
 
-** In Binary tree degree(0) = degree(2)+1
+** In Binary tree degree(0) = degree(2) + 1
+
 
 
 *************************** Strict/Proper/Complete Binary Tree   ********************** 
 
 ** A node must have degree (0) or degree(2) 
 
-** if h is given the minimum number of nodes n = 2*h +1
-** if h is given the maximum number of nodes n = (2^h+1)-1
+** if height is given the minimum number of nodes n = 2*h +1
+** if height is given the maximum number of nodes n = (2^h+1)-1
 
-** if n is given the minimum height h = log2(n+1)-1   
-** if n is given the maximum height h = (n-1)/2
+** if node is given the minimum height h = log2(n+1)-1   
+** if node is given the maximum height h = (n-1)/2
 
 ** Number of external nodes = internal nodes + 1
+
 
 
 ********************************* n-ary Tree  ***************************
@@ -91,4 +101,4 @@
     ## Right child at index = 2*i +1
     ## parent of any node = i/2
 
-** if there are n nodes then there is n+1 null 
+** if there are n nodes then there is n+1 null.
