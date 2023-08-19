@@ -102,3 +102,15 @@
     ## parent of any node = i/2
 
 ** if there are n nodes then there is n+1 null.
+
+
+
+**************************** Tree Traversal **************************************
+
+** Preorder : Visit (Node), Preorder(Left subtree), Preorder(Right Subtree)
+
+** Inorder : Inorder(left), Visit(Node), Inorder(Right)
+
+** Postorder : Postorder(left), Postorder(Right), Visit(NOde)
+
+** Level : Level By Level
