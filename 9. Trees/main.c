@@ -1,54 +1,66 @@
 #include <stdio.h>
 #include <stdlib.h>
-struct Queue
+struct Node
 {
-    int size;
-    int front;
-    int rear;
-    int *Q;
-};
+    int data;
+    struct Node *lchild;
+    struct Node *rchild;
+} *root = NULL;
 
-// Creating Queue
-void CreateQueue(struct Queue *q, int size)
+// Creating Binary Tree
+struct Node *Create()
 {
-    q->size = size;
-    q->Q = (int *)malloc(q->size * sizeof(int));
-    q->front = -1;
-    q->rear = -1;
+    int x;
+    struct Node *newnode;
+    newnode = (struct Node *)malloc(sizeof(struct Node));
+    printf("Enter the value(-1 for NULL ) : ");
+    scanf("%d", &x);
+    if (x == -1)
+        return 0;
+    newnode->data = x;
+    printf("Enter the Left Child of %d\n", x);
+    newnode->lchild = Create();
+    printf("Enter the Right Child of %d\n", x);
+    newnode->rchild = Create();
+    return newnode;
 }
 
-// Display Queue
-void display(struct Queue q)
+// Tree Traversal (Preorder)
+void Preorder(struct Node *root)
 {
-    for (int i = q.front + 1; i <= q.rear; i++)
-        printf("%d ", q.Q[i]);
-    printf("\n");
-}
-// Inserting in queue
-void enqueue(struct Queue *q, int x)
-{
-    if (q->rear == q->size - 1)
-        printf("Queue is Full\n");
-    else
-    {
-        q->rear++;
-        q->Q[q->rear] = x;
-    }
+    if (root == NULL)
+        return;
+    printf("%d ", root->data);
+    Preorder(root->lchild);
+    Preorder(root->rchild);
 }
 
-// Delete from queue
-int dequeue(struct Queue *q)
+// Tree Traversal (Inorder)
+void Inorder(struct Node *root)
 {
-    int x = -1;
-    if (q->rear == q->front)
-        printf("Queue is Empty!!\n");
-    else
-    {
-        q->front++;
-        x = q->Q[q->front];
-    }
-    return x;
+    if (root == NULL)
+        return;
+    Inorder(root->lchild);
+    printf("%d ", root->data);
+    Inorder(root->rchild);
+}
+
+// Tree Traversal (Postorder)
+void Postorder(struct Node *root)
+{
+    if (root == NULL)
+        return;
+    Postorder(root->lchild);
+    Postorder(root->rchild);
+    printf("%d ", root->data);
 }
 int main()
 {
+    root = Create();
+    printf("\nPreorder : ");
+    Preorder(root);
+    printf("\nInorder : ");
+    Inorder(root);
+    printf("\nPostorder : ");
+    Postorder(root);
 }

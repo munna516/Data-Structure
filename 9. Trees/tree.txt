@@ -96,7 +96,13 @@
 
 ***************************  Representing Binary Tree  ***********************
 
-** if element is at index i then the 
+** if element is at index i then the [array index start From 0]
+    ## left child at index = 2*i +1
+    ## Right child at index = 2*i +2
+    ## parent of any node = (i-1)/2
+
+
+** if element is at index i then the [array index start From 1]
     ## left child at index = 2*i
     ## Right child at index = 2*i +1
     ## parent of any node = i/2
@@ -105,7 +111,7 @@
 
 
 
-**************************** Tree Traversal **************************************
+**************************** Tree Traversal  ***********************************
 
 ** Preorder : Visit (Node), Preorder(Left subtree), Preorder(Right Subtree)
 
