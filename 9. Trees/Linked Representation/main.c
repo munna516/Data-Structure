@@ -16,7 +16,7 @@ struct Node *Create()
     printf("Enter the value(-1 for NULL ) : ");
     scanf("%d", &x);
     if (x == -1)
-        return 0;
+        return NULL;
     newnode->data = x;
     printf("Enter the Left Child of %d\n", x);
     newnode->lchild = Create();
@@ -54,6 +54,22 @@ void Postorder(struct Node *root)
     Postorder(root->rchild);
     printf("%d ", root->data);
 }
+
+// Count of Nodes in Tree
+int CountOfNodes(struct Node *root)
+{
+    if (root == NULL)
+        return 0;
+    return CountOfNodes(root->lchild) + CountOfNodes(root->rchild) + 1;
+}
+
+// Sum of all nodes
+int SumofNodes(struct Node *root)
+{
+    if (root == NULL)
+        return 0;
+    return (root->data + SumofNodes(root->lchild) + SumofNodes(root->rchild));
+}
 int main()
 {
     root = Create();
@@ -63,4 +79,7 @@ int main()
     Inorder(root);
     printf("\nPostorder : ");
     Postorder(root);
+    printf("\n");
+    printf("Total Nodes : %d\n", CountOfNodes(root));
+    printf("Sum of  Nodes : %d\n", SumofNodes(root));
 }

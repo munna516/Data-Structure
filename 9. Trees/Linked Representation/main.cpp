@@ -17,7 +17,7 @@ public:
     {
         int x;
         struct Node *newnode;
-        newnode = (struct Node *)malloc(sizeof(struct Node));
+        newnode = new Node;
         printf("Enter the value(-1 for NULL ) : ");
         scanf("%d", &x);
         if (x == -1)
@@ -57,6 +57,22 @@ public:
         Postorder(root->lchild);
         Postorder(root->rchild);
         printf("%d ", root->data);
+    }
+
+    // Count of Nodes in Tree
+    int CountOfNodes(Node *root)
+    {
+        if (root == NULL)
+            return 0;
+        return CountOfNodes(root->lchild) + CountOfNodes(root->rchild) + 1;
+    }
+
+    // Sum of all nodes
+    int SumofNodes(Node *root)
+    {
+        if (root == NULL)
+            return 0;
+        return (root->data + SumofNodes(root->lchild) + SumofNodes(root->rchild));
     }
 };
 
