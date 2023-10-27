@@ -6,7 +6,7 @@
 
 ** First Node on the top is root node.
 
-** The node which is a predecessor of a node is called the parent node of that node.
+** The node which is a immediate predecessor of a node is called the parent node of that node.
 
 ** The node which is the immediate successor of a node is called the child node of that node
 
@@ -14,7 +14,7 @@
 
 ** Any successor node on the path from the that node to leaf node is called decendent
 
-** Any predecessor nodes on the path of the root node  to that node are called Ancestors of that node
+** Any predecessor nodes on the path from the root node to that node are called Ancestors of that node
 
 ** Degree of a node is the immediate children of that node.
 
