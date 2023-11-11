@@ -32,6 +32,14 @@
 
 
 
+************************** Types of Binary Tree    *****************
+
+1. Full Binary Tree : Each node either 0 or 2 children.
+
+2. Complete Binary Tree : All levels ar Completely filled except last level.
+  Last level has all nodes as left as possible.
+
+3. Perfect Binary Tree : All leaf nodes are same level.
 
 *************************** Unleveled nodes ***************************  
 
@@ -49,7 +57,8 @@
 
 
 
-*******************************  Heights Vs nodes  ************************************
+***************************  Heights Vs nodes  ***************************
+
 ** If Height is given the minimum number of nodes n = h+1
 ** If Height is given the maximum number of nodes n = (2^h+1) -1
 
@@ -63,7 +72,7 @@
 
 
 
-*************************** Strict/Proper/Complete Binary Tree   ********************** 
+********************** Strict/Proper/Complete Binary Tree ********************** 
 
 ** A node must have degree (0) or degree(2) 
 
@@ -113,10 +122,10 @@
 
 **************************** Tree Traversal  ***********************************
 
-** Preorder : Visit (Node), Preorder(Left subtree), Preorder(Right Subtree)
+** Preorder : Root -> Left -> Right
 
-** Inorder : Inorder(left), Visit(Node), Inorder(Right)
+** Inorder : Left -> Root -> Right
 
-** Postorder : Postorder(left), Postorder(Right), Visit(NOde)
+** Postorder : Left -> Right -> Root
 
 ** Level : Level By Level

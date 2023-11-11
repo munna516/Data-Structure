@@ -1,89 +1,98 @@
 #include <bits/stdc++.h>
 using namespace std;
-class Node
+class node
 {
 public:
+    node *lchild;
     int data;
-    struct Node *lchild;
-    struct Node *rchild;
+    node *rchild;
 };
-
 class Tree
 {
 public:
-    struct Node *root = NULL;
-    // Creating Binary Tree
-    Node *Create()
+    node *root;
+    Tree()
     {
-        int x;
-        struct Node *newnode;
-        newnode = new Node;
-        printf("Enter the value(-1 for NULL ) : ");
-        scanf("%d", &x);
-        if (x == -1)
-            return 0;
-        newnode->data = x;
-        printf("Enter the Left Child of %d\n", x);
-        newnode->lchild = Create();
-        printf("Enter the Right Child of %d\n", x);
-        newnode->rchild = Create();
-        return newnode;
+        root = NULL;
     }
 
-    // Tree Traversal (Preorder)
-    void Preorder(Node *root)
+    node *CreateNode(int value)
     {
-        if (root == NULL)
+        node *new_node = new node;
+        new_node->data = value;
+        new_node->lchild = NULL;
+        new_node->rchild = NULL;
+        return new_node;
+    }
+    void Create()
+    {
+        node *p, *t;
+        queue<node *> q;
+        int r;
+        cout << "Enter Root : ";
+        cin >> r;
+        root = CreateNode(r);
+        q.push(root);
+        while (!q.empty())
+        {
+            p = q.front();
+            q.pop();
+            int lc, rc;
+            cout << "Enter the left child of " << p->data << " : ";
+            cin >> lc;
+            if (lc != -1)
+            {
+                t = CreateNode(lc);
+                p->lchild = t;
+                q.push(t);
+            }
+            cout << "Enter the right child " << p->data << " : ";
+            cin >> rc;
+            if (rc != -1)
+            {
+                t = CreateNode(rc);
+                p->rchild = t;
+                q.push(t);
+            }
+        }
+    }
+
+    void Inorder(node *p)
+    {
+        if (p == NULL)
             return;
-        printf("%d ", root->data);
-        Preorder(root->lchild);
-        Preorder(root->rchild);
+        Inorder(p->lchild);
+        cout << p->data << " ";
+        Inorder(p->rchild);
     }
 
-    // Tree Traversal (Inorder)
-    void Inorder(Node *root)
+    void Preorder(node *p)
     {
-        if (root == NULL)
+        if (p == NULL)
             return;
-        Inorder(root->lchild);
-        printf("%d ", root->data);
-        Inorder(root->rchild);
+        cout << p->data << " ";
+        Preorder(p->lchild);
+        Preorder(p->rchild);
     }
-    // Tree Traversal (Postorder)
-    void Postorder(Node *root)
+    void Postorder(node *p)
     {
-        if (root == NULL)
+        if (p == NULL)
             return;
-        Postorder(root->lchild);
-        Postorder(root->rchild);
-        printf("%d ", root->data);
-    }
-
-    // Count of Nodes in Tree
-    int CountOfNodes(Node *root)
-    {
-        if (root == NULL)
-            return 0;
-        return CountOfNodes(root->lchild) + CountOfNodes(root->rchild) + 1;
-    }
-
-    // Sum of all nodes
-    int SumofNodes(Node *root)
-    {
-        if (root == NULL)
-            return 0;
-        return (root->data + SumofNodes(root->lchild) + SumofNodes(root->rchild));
+        Postorder(p->lchild);
+        Postorder(p->rchild);
+        cout << p->data << " ";
     }
 };
-
 int main()
 {
     Tree t;
-    t.root = t.Create();
-    printf("\nPreorder : ");
-    t.Preorder(t.root);
-    printf("\nInorder : ");
+    t.Create();
+    cout << "Inorder : ";
     t.Inorder(t.root);
-    printf("\nPostorder : ");
+    cout << "\nPreorder : ";
+    t.Preorder(t.root);
+    cout << "\nPostorder : ";
     t.Postorder(t.root);
+
+    return 0;
 }
