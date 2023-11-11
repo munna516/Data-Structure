@@ -19,6 +19,11 @@ public:
     node *CreateNode(int value)
     {
         node *new_node = new node;
+        if (new_node == NULL)
+        {
+            printf("Memory allocation failed\n");
+            exit(EXIT_FAILURE);
+        }
         new_node->data = value;
         new_node->lchild = NULL;
         new_node->rchild = NULL;

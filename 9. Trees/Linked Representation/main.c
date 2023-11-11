@@ -1,85 +1,100 @@
 #include <stdio.h>
 #include <stdlib.h>
-struct Node
+struct node
 {
+    struct node *lchild;
     int data;
-    struct Node *lchild;
-    struct Node *rchild;
+    struct node *rchild;
 } *root = NULL;
 
-// Creating Binary Tree
-struct Node *Create()
+struct node *CreateNode(int value)
 {
-    int x;
-    struct Node *newnode;
-    newnode = (struct Node *)malloc(sizeof(struct Node));
-    printf("Enter the value(-1 for NULL ) : ");
-    scanf("%d", &x);
-    if (x == -1)
-        return NULL;
-    newnode->data = x;
-    printf("Enter the Left Child of %d\n", x);
-    newnode->lchild = Create();
-    printf("Enter the Right Child of %d\n", x);
-    newnode->rchild = Create();
-    return newnode;
+    struct node *new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL)
+    {
+        printf("Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+
+    new_node->data = value;
+    new_node->lchild = NULL;
+    new_node->rchild = NULL;
+    return new_node;
 }
 
-// Tree Traversal (Preorder)
-void Preorder(struct Node *root)
+void Create(struct node *t)
 {
-    if (root == NULL)
+    struct node *p, *t_node;
+    int r;
+    printf("Enter Root : ");
+    scanf("%d", &r);
+    root = CreateNode(r);
+
+    struct node *q[100]; // Assuming a maximum of 100 nodes
+    int front = -1, rear = -1;
+    q[++rear] = root;
+
+    while (front != rear)
+    {
+        p = q[++front];
+        int lc, rc;
+        printf("Enter the left child of %d : ", p->data);
+        scanf("%d", &lc);
+        if (lc != -1)
+        {
+            t_node = CreateNode(lc);
+            p->lchild = t_node;
+            q[++rear] = t_node;
+        }
+
+        printf("Enter the right child of %d : ", p->data);
+        scanf("%d", &rc);
+        if (rc != -1)
+        {
+            t_node = CreateNode(rc);
+            p->rchild = t_node;
+            q[++rear] = t_node;
+        }
+    }
+}
+
+void Inorder(struct node *p)
+{
+    if (p == NULL)
         return;
-    printf("%d ", root->data);
-    Preorder(root->lchild);
-    Preorder(root->rchild);
+    Inorder(p->lchild);
+    printf("%d ", p->data);
+    Inorder(p->rchild);
 }
 
-// Tree Traversal (Inorder)
-void Inorder(struct Node *root)
+void Preorder(struct node *p)
 {
-    if (root == NULL)
+    if (p == NULL)
         return;
-    Inorder(root->lchild);
-    printf("%d ", root->data);
-    Inorder(root->rchild);
+    printf("%d ", p->data);
+    Preorder(p->lchild);
+    Preorder(p->rchild);
 }
 
-// Tree Traversal (Postorder)
-void Postorder(struct Node *root)
+void Postorder(struct node *p)
 {
-    if (root == NULL)
+    if (p == NULL)
         return;
-    Postorder(root->lchild);
-    Postorder(root->rchild);
-    printf("%d ", root->data);
+    Postorder(p->lchild);
+    Postorder(p->rchild);
+    printf("%d ", p->data);
 }
 
-// Count of Nodes in Tree
-int CountOfNodes(struct Node *root)
-{
-    if (root == NULL)
-        return 0;
-    return CountOfNodes(root->lchild) + CountOfNodes(root->rchild) + 1;
-}
-
-// Sum of all nodes
-int SumofNodes(struct Node *root)
-{
-    if (root == NULL)
-        return 0;
-    return (root->data + SumofNodes(root->lchild) + SumofNodes(root->rchild));
-}
 int main()
 {
-    root = Create();
+    struct node t;
+    Create(&t);
+    printf("Inorder : ");
+    Inorder(root);
     printf("\nPreorder : ");
     Preorder(root);
-    printf("\nInorder : ");
-    Inorder(root);
     printf("\nPostorder : ");
     Postorder(root);
-    printf("\n");
-    printf("Total Nodes : %d\n", CountOfNodes(root));
-    printf("Sum of  Nodes : %d\n", SumofNodes(root));
+
+    return 0;
 }
