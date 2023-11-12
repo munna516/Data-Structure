@@ -87,6 +87,75 @@ public:
         Postorder(p->rchild);
         cout << p->data << " ";
     }
+
+    void IterativePreorder(node *p)
+    {
+        stack<node *> st;
+        while (p != NULL || !st.empty())
+        {
+            if (p != NULL)
+            {
+                cout << p->data << " ";
+                st.push(p);
+                p = p->lchild;
+            }
+            else
+            {
+                p = st.top();
+                st.pop();
+                p = p->rchild;
+            }
+        }
+    }
+
+    void IterativeInorder(node *p)
+    {
+        stack<node *> st;
+        while (p != NULL || !st.empty())
+        {
+            if (p != NULL)
+            {
+                st.push(p);
+                p = p->lchild;
+            }
+            else
+            {
+                p = st.top();
+                st.pop();
+                cout << p->data << " ";
+                p = p->rchild;
+            }
+        }
+    }
+
+    void IterativePostorder(node *p)
+    {
+        stack<node *> st;
+        long long temp;
+        while (p != NULL || !st.empty())
+        {
+            if (p != NULL)
+            {
+                st.push(p);
+                p = p->lchild;
+            }
+            else
+            {
+                temp = (int)st.top();
+                st.pop();
+                if (temp > 0)
+                {
+                    st.push((node *)-temp);
+                    p = p->rchild;
+                }
+                else
+                {
+                    cout << p->data << " ";
+                    p = NULL;
+                }
+            }
+        }
+    }
 };
 int main()
 {
@@ -94,10 +163,16 @@ int main()
     t.Create();
     cout << "Inorder : ";
     t.Inorder(t.root);
+    cout << "\nIterative Inorder : ";
+    t.IterativeInorder(t.root);
     cout << "\nPreorder : ";
     t.Preorder(t.root);
+    cout << "\nIterative Preorder : ";
+    t.IterativePreorder(t.root);
     cout << "\nPostorder : ";
     t.Postorder(t.root);
+    cout << "\nIterative PostOrder : ";
+    t.IterativePostorder(t.root);
 
     return 0;
 }
