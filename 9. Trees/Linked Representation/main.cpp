@@ -171,6 +171,84 @@ public:
             }
         }
     }
+
+    // Level Order Traversal
+    void Levelorder(node *p)
+    {
+        queue<node *> q;
+        cout << p->data << " ";
+        q.push(p);
+        while (!q.empty())
+        {
+            p = q.front();
+            q.pop();
+            if (p->lchild)
+            {
+                cout << p->lchild->data << " ";
+                q.push(p->lchild);
+            }
+            if (p->rchild)
+            {
+                cout << p->rchild->data << " ";
+                q.push(p->rchild);
+            }
+        }
+    }
+
+    // Count of Nodes
+    int CountofNodes(node *p)
+    {
+        if (p == NULL)
+            return 0;
+        return CountofNodes(p->lchild) + CountofNodes(p->rchild) + 1;
+    }
+
+    // Sum of All Nodes
+    int SumofNodes(node *p)
+    {
+        if (p == NULL)
+            return 0;
+        return SumofNodes(p->lchild) + SumofNodes(p->rchild) + p->data;
+    }
+
+    // Count of leaf Nodes
+    int LeafNodesCount(node *p)
+    {
+        if (p == NULL)
+            return 0;
+        if (p->lchild == NULL && p->rchild == NULL)
+            return 1;
+        return LeafNodesCount(p->lchild) + LeafNodesCount(p->rchild);
+    }
+
+    // Nodes With Degree 1
+    int Nodes_with_degree_1(node *p)
+    {
+        if (p == NULL)
+            return 0;
+        if ((p->lchild == NULL && p->rchild != NULL) || (p->lchild != NULL && p->rchild == NULL))
+            return 1;
+        return Nodes_with_degree_1(p->lchild) + Nodes_with_degree_1(p->rchild);
+    }
+
+    // Nodes With degree 2
+    int Nodes_with_degree_2(node *p)
+    {
+        if (p == NULL)
+            return 0;
+        if (p->lchild && p->rchild)
+            return Nodes_with_degree_2(p->lchild) + Nodes_with_degree_2(p->rchild) + 1;
+    }
+
+    // Height of a Tree
+    int Height(node *p)
+    {
+        if (p == NULL)
+            return 0;
+        int x = Height(p->lchild);
+        int y = Height(p->rchild);
+        return max(x, y)+1;
+    }
 };
 int main()
 {
@@ -188,6 +266,14 @@ int main()
     t.Postorder(t.root);
     cout << endl;
     t.IterativePostorder(t.root);
+    cout << "\nLevel Order : \n";
+    t.Levelorder(t.root);
+    cout << "\nTotal Nodes : " << t.CountofNodes(t.root) << endl;
+    cout << "Sum of Nodes : " << t.SumofNodes(t.root) << endl;
+    cout << "Nodes with degree 0 : " << t.LeafNodesCount(t.root) << endl;
+    cout << "Nodes with degree 1 : " << t.Nodes_with_degree_1(t.root) << endl;
+    cout << "Nodes with degree 2 : " << t.Nodes_with_degree_2(t.root) << endl;
+    cout << "Height of a tree : " << t.Height(t.root) << endl;
 
     return 0;
 }
