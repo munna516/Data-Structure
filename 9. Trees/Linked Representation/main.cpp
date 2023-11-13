@@ -16,34 +16,37 @@ public:
         root = NULL;
     }
 
-    node *CreateNode(int value)
+    // Creating Node
+    node *CreateNode(int dataue)
     {
-        node *new_node = new node;
-        if (new_node == NULL)
+        node *newNode = new node;
+        if (newNode == NULL)
         {
             printf("Memory allocation failed\n");
             exit(EXIT_FAILURE);
         }
-        new_node->data = value;
-        new_node->lchild = NULL;
-        new_node->rchild = NULL;
-        return new_node;
+        newNode->data = dataue;
+        newNode->lchild = NULL;
+        newNode->rchild = NULL;
+        return newNode;
     }
-    void Create()
+
+    // Create Tree
+    void CreateTree()
     {
-        node *p, *t;
         queue<node *> q;
         int r;
-        cout << "Enter Root : ";
+        cout << "Enter root : ";
         cin >> r;
         root = CreateNode(r);
+        node *p, *t;
         q.push(root);
         while (!q.empty())
         {
             p = q.front();
             q.pop();
             int lc, rc;
-            cout << "Enter the left child of " << p->data << " : ";
+            cout << "Enter lchild child of " << p->data << " : ";
             cin >> lc;
             if (lc != -1)
             {
@@ -51,7 +54,7 @@ public:
                 p->lchild = t;
                 q.push(t);
             }
-            cout << "Enter the right child " << p->data << " : ";
+            cout << "Enter rchild child of " << p->data << " : ";
             cin >> rc;
             if (rc != -1)
             {
@@ -62,6 +65,17 @@ public:
         }
     }
 
+    // Preorder Traversal
+    void Preorder(node *p)
+    {
+        if (p == NULL)
+            return;
+        cout << p->data << " ";
+        Preorder(p->lchild);
+        Preorder(p->rchild);
+    }
+
+    // Inorder Traversal
     void Inorder(node *p)
     {
         if (p == NULL)
@@ -71,14 +85,7 @@ public:
         Inorder(p->rchild);
     }
 
-    void Preorder(node *p)
-    {
-        if (p == NULL)
-            return;
-        cout << p->data << " ";
-        Preorder(p->lchild);
-        Preorder(p->rchild);
-    }
+    // Postorder Traversal
     void Postorder(node *p)
     {
         if (p == NULL)
@@ -88,8 +95,11 @@ public:
         cout << p->data << " ";
     }
 
+    // Iterative Preorder
     void IterativePreorder(node *p)
     {
+        if (p == NULL)
+            return;
         stack<node *> st;
         while (p != NULL || !st.empty())
         {
@@ -103,13 +113,17 @@ public:
             {
                 p = st.top();
                 st.pop();
+
                 p = p->rchild;
             }
         }
     }
 
+    // Iterative Inorder
     void IterativeInorder(node *p)
     {
+        if (p == NULL)
+            return;
         stack<node *> st;
         while (p != NULL || !st.empty())
         {
@@ -128,6 +142,7 @@ public:
         }
     }
 
+    // Iterative Postorder
     void IterativePostorder(node *p)
     {
         stack<node *> st;
@@ -141,16 +156,16 @@ public:
             }
             else
             {
-                temp = (int)st.top();
+                temp = (long long)st.top();
                 st.pop();
                 if (temp > 0)
                 {
                     st.push((node *)-temp);
-                    p = p->rchild;
+                    p = ((node *)temp)->rchild;
                 }
                 else
                 {
-                    cout << p->data << " ";
+                    cout << ((node *)-temp)->data << " ";
                     p = NULL;
                 }
             }
@@ -160,19 +175,35 @@ public:
 int main()
 {
     Tree t;
-    t.Create();
-    cout << "Inorder : ";
-    t.Inorder(t.root);
-    cout << "\nIterative Inorder : ";
-    t.IterativeInorder(t.root);
-    cout << "\nPreorder : ";
+    t.CreateTree();
+    cout << "\nPreorder : \n";
     t.Preorder(t.root);
-    cout << "\nIterative Preorder : ";
+    cout << endl;
     t.IterativePreorder(t.root);
-    cout << "\nPostorder : ";
+    cout << "\nInorder : \n";
+    t.Inorder(t.root);
+    cout << endl;
+    t.IterativeInorder(t.root);
+    cout << "\nPostorder : \n";
     t.Postorder(t.root);
-    cout << "\nIterative PostOrder : ";
+    cout << endl;
     t.IterativePostorder(t.root);
 
     return 0;
 }
+
+/*
+5
+1
+6
+4
+3
+8
+-1
+-1
+-1
+-1
+-1
+-1
+-1
+*/
