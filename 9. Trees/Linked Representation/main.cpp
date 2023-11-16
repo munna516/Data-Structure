@@ -113,7 +113,6 @@ public:
             {
                 p = st.top();
                 st.pop();
-
                 p = p->rchild;
             }
         }
