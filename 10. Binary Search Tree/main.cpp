@@ -155,6 +155,39 @@ public:
         cout << p->data << " ";
         Inorder(p->rchild);
     }
+
+    // Generate BST from Preorder O(N)
+    void CreatePre(int ar[], int n) 
+    {
+        stack<node *> st;
+        node *p = NULL, *t = NULL;
+        root = CreateNode(ar[0]);
+        p = root;
+        int i = 1;
+        while (i < n)
+        {
+            if (ar[i] < p->data)
+            {
+                t = CreateNode(ar[i]);
+                i++;
+                p->lchild = t;
+                st.push(p);
+                p = t;
+            }
+            else
+            {
+                while (!st.empty() && ar[i] > st.top()->data)
+                {
+                    p = st.top();
+                    st.pop();
+                }
+                t = CreateNode(ar[i]);
+                i++;
+                p->rchild = t;
+                p = t;
+            }
+        }
+    }
 };
 int main()
 {
@@ -172,6 +205,11 @@ int main()
     else
         cout << "Element is not found" << endl;
     t.Delete(t.root, 5);
+    t.Inorder(t.root);
+    cout << endl;
+    int ar[] = {30, 20, 10, 15, 25, 40, 50, 45};
+    int n = 8;
+    t.CreatePre(ar, n);
     t.Inorder(t.root);
     return 0;
 }
