@@ -52,6 +52,22 @@ public:
             r->lchild = p;
     }
 
+    // Recursive Insert
+    node *RInsert(node *p, int key)
+    {
+        node *t = NULL;
+        if (p == NULL)
+        {
+            t = CreateNode(key);
+            return t;
+        }
+        if (key < p->data)
+            p->lchild = RInsert(p->lchild, key);
+        else if (key > p->data)
+            p->rchild = RInsert(p->rchild, key);
+        return p;
+    }
+
     // Search element
     node *Search(int value)
     {
@@ -67,6 +83,69 @@ public:
         }
         return NULL;
     }
+
+    // Height of a tree
+    int Height(node *p)
+    {
+        int x, y;
+        if (p == NULL)
+            return 0;
+        x = Height(p->lchild);
+        y = Height(p->rchild);
+        return max(x, y);
+    }
+
+    // Inorder Predecissor
+    node *Inpre(node *p)
+    {
+        while (p && p->rchild != NULL)
+            p = p->rchild;
+        return p;
+    }
+
+    // Inorder Succosor
+    node *InSucc(node *p)
+    {
+        while (p && p->lchild != NULL)
+            p = p->lchild;
+        return p;
+    }
+
+    // Delete a Node
+    node *Delete(node *p, int key)
+    {
+        node *q = NULL;
+        if (p == NULL)
+            return NULL;
+        if (p->lchild == NULL && p->rchild == NULL)
+        {
+            if (p == root)
+                root = NULL;
+            delete (p);
+            return NULL;
+        }
+        if (key < p->data)
+            p->lchild = Delete(p->lchild, key);
+        else if (key > p->data)
+            p->rchild = Delete(p->rchild, key);
+        else
+        {
+            if (Height(p->lchild) > Height(p->rchild))
+            {
+                q = Inpre(p->lchild);
+                p->data = q->data;
+                p->lchild = Delete(p->lchild, q->data);
+            }
+            else
+            {
+                q = InSucc(p->rchild);
+                p->data = q->data;
+                p->rchild = Delete(p->rchild, q->data);
+            }
+        }
+        return p;
+    }
+
     //  Inorder Treversal
     void Inorder(node *p)
     {
@@ -92,5 +171,7 @@ int main()
         cout << "Element " << temp->data << " is found " << endl;
     else
         cout << "Element is not found" << endl;
+    t.Delete(t.root, 5);
+    t.Inorder(t.root);
     return 0;
 }
