@@ -92,7 +92,7 @@ public:
             return 0;
         x = Height(p->lchild);
         y = Height(p->rchild);
-        return max(x, y);
+        return max(x, y) + 1;
     }
 
     // Inorder Predecissor
@@ -157,7 +157,7 @@ public:
     }
 
     // Generate BST from Preorder O(N)
-    void CreatePre(int ar[], int n) 
+    void CreatePre(int ar[], int n)
     {
         stack<node *> st;
         node *p = NULL, *t = NULL;
