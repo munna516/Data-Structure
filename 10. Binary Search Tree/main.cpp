@@ -117,35 +117,42 @@ public:
         node *q = NULL;
         if (p == NULL)
             return NULL;
-        if (p->lchild == NULL && p->rchild == NULL)
-        {
-            if (p == root)
-                root = NULL;
-            delete (p);
-            return NULL;
-        }
         if (key < p->data)
             p->lchild = Delete(p->lchild, key);
         else if (key > p->data)
             p->rchild = Delete(p->rchild, key);
         else
         {
-            if (Height(p->lchild) > Height(p->rchild))
+            if (p->lchild && p->rchild)
             {
-                q = Inpre(p->lchild);
-                p->data = q->data;
-                p->lchild = Delete(p->lchild, q->data);
-            }
-            else
-            {
+                // Node with two children, find in-order successor
                 q = InSucc(p->rchild);
                 p->data = q->data;
                 p->rchild = Delete(p->rchild, q->data);
             }
+            else
+            {
+                // Node with one child or no child
+                q = p;
+                if (p == root)
+                {
+                    if (p->lchild)
+                        root = p->lchild;
+                    else
+                        root = p->rchild;
+                }
+                if (p->lchild)
+                    p = p->lchild;
+                else if (p->rchild)
+                    p = p->rchild;
+                else
+                    p = NULL;
+
+                delete q;
+            }
         }
         return p;
     }
-
     //  Inorder Treversal
     void Inorder(node *p)
     {
